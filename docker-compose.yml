@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+    website:
+        build:
+            dockerfile: ./.docker/Dockerfile
+        tty: true
+        ports:
+            - "80:80"
+        volumes:
+            - ./.docker/nginx/default.conf:/etc/nginx/sites-enabled/default
+            - ./.docker/supervisor/supervisor.conf:/etc/supervisord.conf
+            - .:/var/www/app/
+            - mongodb:/var/lib/mongodb
+volumes:
+  mongodb:
