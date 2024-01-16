@@ -15,7 +15,7 @@
     </head>
     <body class="antialiased bg-[#230235]">
         <div class="min-h-screen text-gray-500 dark:text-gray-400 bg-dots-darker bg-center bg-[#230235] dark:bg-dots-lighter selection:bg-purple-500 selection:text-white">
-            <div class="pt-4 px-10 min-w-full flex flex-col items-center sm:flex-row">
+            <header class="py-4 px-10 min-w-full flex flex-col items-center sm:flex-row">
                 <a href="{{ route('home') }}">
                     <img src="{{ Vite::asset('resources/assets/logo/logo-white-transparent.svg') }}" class="w-64"/>
                 </a>
@@ -30,10 +30,11 @@
                         🔀 Compare Dogamis 🚧
                     </a>
                 </div>
-            </div>
+            </header>
             <main class="max-w-[1280px] mx-auto py-5">
                 @yield('content')
             </main>
+            <footer class="min-h-52"></footer>
         </div>
     </body>
 
