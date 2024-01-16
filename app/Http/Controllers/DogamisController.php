@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dogami;
+use App\Services\DogamiService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Artisan;
 
 class DogamisController extends BaseController
 {
@@ -33,5 +35,14 @@ class DogamisController extends BaseController
         return view('dogamis.one', [
             'dogami' => $dogami,
         ]);
+    }
+
+    public function update(int $dogami_id, DogamiService $dogamiService) {
+        $dogami = $dogamiService->fetchDogami($dogami_id);
+        $dogami->save();
+
+        Artisan::call('dogamis:skills:rankings');
+
+        return redirect()->route('dogamis.one', [$dogami->nftId]);
     }
 }

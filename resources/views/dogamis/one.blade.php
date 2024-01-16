@@ -7,6 +7,15 @@
             <p class="text-center mt-4">{{ $dogami->name }}</p>
         </div>
 
+        <div class="flex flex-col gap-2 w-fit mx-auto my-3">
+            <form action="{{ route('dogamis.one.update', $dogami->nftId) }}" method="post">
+                @csrf
+                <button class="bg-[#2d123b] transition border border-[#2d123b] active:border-gray-400 px-6 py-2 rounded-md">
+                    Update this Dogami
+                </button>
+            </form>
+        </div>
+
         @if (count($dogami->skills) > 0)
             @include('components.dogami_table', $dogami)
         @endif
