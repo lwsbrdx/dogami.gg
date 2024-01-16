@@ -1,7 +1,12 @@
 <div class="min-w-72 max-w-[600px] grid grid-cols-2 sm:grid-cols-3 justify-items-center mx-auto mt-5 gap-y-4">
     @foreach ($dogami->skills as $skill)
     @php
-        $rank = $dogami->getSkillRank($skill->trait_type)
+        $rank = $dogami->getSkillRank($skill->trait_type);
+        $otherRank = false;
+
+        if (isset($otherDogami)) {
+            $otherRank = $otherDogami->getSkillRank($skill->trait_type);
+        }
     @endphp
 
     <div class="bg-[#230235] shadow-lg shadow-black border border-purple-800 rounded-md w-36 h-36 sm:w-44 sm:h-44 p-2 flex flex-col items-center justify-around text-center text-sm sm:text-sm">
@@ -29,7 +34,28 @@
 
         <p>{{ $skill->trait_type }}</p>
         <p>{{ $skill->rank }}</p>
-        <p>{{ $skill->bonused_value }}</p>
+
+        <div class="flex flex-row gap-2 items-center">
+            @if(isset($otherDogami))
+                @php
+                    $trait_type = strtolower($skill->trait_type);
+                @endphp
+                <p class="font-extrabold {{ $skill->bonused_value < $otherDogami->$trait_type->bonused_value ? 'text-red-500' : 'text-green-500' }}">
+                    {{ $skill->bonused_value }}
+                </p>
+
+                @if ($skill->bonused_value < $otherDogami->$trait_type->bonused_value)
+                    <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
+                @else
+                    <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
+                @endif
+            @else
+                <p>
+                    {{ $skill->bonused_value }}
+                </p>
+            @endif
+        </div>
+
         <p>
             @if ($rank)
                 {{ $rank->ranking }} / {{ \App\Models\DogamisRank::totalRanksForSkill($skill->trait_type) }}

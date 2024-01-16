@@ -26,6 +26,9 @@
                     <a href="{{ route('leaderboards') }}" class="font-bold text-xl">
                         🏆 Leaderboards
                     </a>
+                    <a href="#" class="font-bold text-xl">
+                        🔀 Compare Dogamis 🚧
+                    </a>
                 </div>
             </div>
             <main class="max-w-[1280px] mx-auto py-5">

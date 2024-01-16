@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompareDogamisController;
 use App\Http\Controllers\DogamisController;
 use App\Http\Controllers\LeaderboardsController;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,5 @@ Route::get('/dogami/{dogami_id}', [DogamisController::class, 'one'])->name('doga
 
 Route::get('/leaderboards', [LeaderboardsController::class, 'all'])->name('leaderboards');
 Route::get('/leaderboards/{skill_type}', [LeaderboardsController::class, 'show'])->name('leaderboard');
+
+Route::get('/compare/{dogamis_list}', [CompareDogamisController::class, 'show'])->name('compare');
