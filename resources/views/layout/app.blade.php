@@ -19,9 +19,12 @@
                 <a href="{{ route('home') }}">
                     <img src="{{ Vite::asset('resources/assets/logo/logo-white-transparent.svg') }}" class="w-64"/>
                 </a>
-                <div class="pt-4 flex flex-col items-center sm:flex-row sm:pt-0 justify-around w-full">
+                <div class="pt-4 flex flex-col items-center sm:flex-row sm:pt-0 gap-6 px-10 w-full">
                     <a href="{{ route('home') }}" class="font-bold text-xl">
                         🏠 Home
+                    </a>
+                    <a href="{{ route('leaderboards') }}" class="font-bold text-xl">
+                        🏆 Leaderboards
                     </a>
                 </div>
             </div>
