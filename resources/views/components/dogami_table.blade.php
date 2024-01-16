@@ -1,4 +1,8 @@
-<div class="min-w-72 max-w-[600px] grid grid-cols-2 sm:grid-cols-3 justify-items-center mx-auto mt-5 gap-y-4">
+@php
+    $isComparing = isset($otherDogami);
+@endphp
+
+<div class="min-w-72 max-w-[600px] grid grid-cols-2 {{ $isComparing ? 'lg:grid-cols-3 lg:w-[500px]' : 'sm:grid-cols-3 sm:w-[500px]' }} w-80 xl:w-[600px] justify-items-center mx-auto mt-5 gap-y-4">
     @foreach ($dogami->skills as $skill)
     @php
         $rank = $dogami->getSkillRank($skill->trait_type);
@@ -9,7 +13,7 @@
         }
     @endphp
 
-    <div class="bg-[#230235] shadow-lg shadow-black border border-purple-800 rounded-md w-36 h-36 sm:w-44 sm:h-44 p-2 flex flex-col items-center justify-around text-center text-sm sm:text-sm">
+    <div class="bg-[#230235] shadow-lg shadow-black border border-purple-800 rounded-md w-36 h-36 xl:w-44 xl:h-44 p-2 flex flex-col items-center justify-around text-center text-sm sm:text-sm">
         @switch(\App\Classes\Dogami\DogamiSkill::SKILLS_COLORS[strtolower($skill->trait_type)] ?? 'white')
             @case('yellow')
                 <div class="bg-yellow-400 rounded-full min-w-6 min-h-6"></div>
@@ -36,7 +40,7 @@
         <p>{{ $skill->rank }}</p>
 
         <div class="flex flex-row gap-2 items-center">
-            @if(isset($otherDogami))
+            @if($isComparing)
                 @php
                     $trait_type = strtolower($skill->trait_type);
                 @endphp
