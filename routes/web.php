@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [DogamisController::class, 'all'])->name('home');
 Route::get('/dogami/{dogami_id}', [DogamisController::class, 'one'])->name('dogamis.one');
 Route::post('/dogami/{dogami_id}', [DogamisController::class, 'update'])->name('dogamis.one.update');
+Route::post('/dogamis/{ids}', [DogamisController::class, 'updateMany'])->name('dogamis.many.update');
 
 Route::get('/leaderboards', [LeaderboardsController::class, 'all'])->name('leaderboards');
 Route::get('/leaderboards/{skill_type}', [LeaderboardsController::class, 'show'])->name('leaderboard');

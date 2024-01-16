@@ -1,8 +1,16 @@
 @extends('layout.app')
 
 @section('content')
-<div class="">
-
+<div class="flex flex-col gap-2 w-fit mx-auto my-3">
+    <form action="{{ route('dogamis.many.update', [
+            implode(',', array_map(fn ($dogami) => $dogami->nftId, $dogamis->all()))
+        ]
+    ) }}" method="post">
+        @csrf
+        <button class="bg-[#2d123b] transition border border-[#2d123b] active:border-gray-400 px-6 py-2 rounded-md">
+            Update Dogamis
+        </button>
+    </form>
 </div>
 <div class="splide dogamis-compare mt-6 pt-10">
     <ul class="splide__pagination !bottom-full"></ul>

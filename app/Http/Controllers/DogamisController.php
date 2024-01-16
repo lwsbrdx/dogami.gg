@@ -45,4 +45,20 @@ class DogamisController extends BaseController
 
         return redirect()->route('dogamis.one', [$dogami->nftId]);
     }
+
+    public function updateMany(string $dogamis_ids, DogamiService $dogamiService) {
+        $ids = explode(',', $dogamis_ids);
+
+        foreach ($ids as $id) {
+            $int_id = intval($id);
+            if ($int_id) {
+                $dogami = $dogamiService->fetchDogami($int_id);
+                $dogami->save();
+            }
+        }
+
+        Artisan::call('dogamis:skills:rankings');
+
+        return redirect()->route('compare', $dogamis_ids);
+    }
 }
