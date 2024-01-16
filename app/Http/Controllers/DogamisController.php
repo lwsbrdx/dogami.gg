@@ -18,7 +18,7 @@ class DogamisController extends BaseController
             $dogamis = Dogami::orderBy('nftId');
         }
 
-        $dogamis = $dogamis->paginate(20);
+        $dogamis = $dogamis->paginate(24);
 
         return view('dogamis.all', [
             'dogamis' => $dogamis,
