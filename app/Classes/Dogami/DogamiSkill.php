@@ -25,6 +25,15 @@ class DogamiSkill extends DogamiAttribute
         self::INSTINCT,
     ];
 
+    public const SKILLS_COLORS = [
+        self::VELOCITY => 'yellow',
+        self::SWIM => 'blue',
+        self::JUMP => 'orange',
+        self::BALANCE => 'green',
+        self::MIGHT => 'red',
+        self::INSTINCT => 'purple',
+    ];
+
     public bool $isSkill = true;
 
     public int $min_value;
