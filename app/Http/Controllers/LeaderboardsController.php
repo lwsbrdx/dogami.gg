@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\Dogami\DogamiSkill;
+use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Models\DogamisRank;
 use Illuminate\Http\Request;
 

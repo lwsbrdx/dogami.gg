@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\Dogami;
-use App\Classes\DogamiClient;
+use App\Classes\Dogami\Http\DogamiClient;
 use GuzzleHttp\Client as GuzzleHttpClient;
 
 class DogamiService {

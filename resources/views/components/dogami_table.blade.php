@@ -14,7 +14,7 @@
     @endphp
 
     <div class="bg-[#230235] shadow-lg shadow-black border border-purple-800 rounded-md w-36 h-36 xl:w-44 xl:h-44 p-2 flex flex-col items-center justify-around text-center text-sm sm:text-sm">
-        @switch(\App\Classes\Dogami\DogamiSkill::SKILLS_COLORS[strtolower($skill->trait_type)] ?? 'white')
+        @switch(\App\Classes\Dogami\Attribute\DogamiSkill::SKILLS_COLORS[strtolower($skill->trait_type)] ?? 'white')
             @case('yellow')
                 <div class="bg-yellow-400 rounded-full min-w-6 min-h-6"></div>
                 @break

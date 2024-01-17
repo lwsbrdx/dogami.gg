@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use App\Classes\Dogami\DogamiAttribute;
-use App\Classes\Dogami\DogamiAttributes;
-use App\Classes\Dogami\DogamiSkill;
+use App\Classes\Dogami\Attribute\DogamiAttribute;
+use App\Classes\Dogami\Attribute\DogamiAttributes;
+use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Classes\Dogami\Enums\DogamiStatus;
-use Exception;
 use MongoDB\Laravel\Eloquent\Model;
+use Exception;
 
 /**
  * Dogami

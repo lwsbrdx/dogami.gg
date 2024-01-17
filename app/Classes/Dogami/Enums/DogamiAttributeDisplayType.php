@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes\Dogami;
+namespace App\Classes\Dogami\Enums;
 
 enum DogamiAttributeDisplayType: string {
     case date = 'date';

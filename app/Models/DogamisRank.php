@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Classes\Dogami\DogamiSkill;
+use App\Classes\Dogami\Attribute\DogamiSkill;
 use Exception;
 use MongoDB\Laravel\Eloquent\Model;
 

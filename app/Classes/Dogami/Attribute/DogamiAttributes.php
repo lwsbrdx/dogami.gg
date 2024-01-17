@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Classes\Dogami;
+namespace App\Classes\Dogami\Attribute;
+
+use App\Classes\Dogami\ObjectEnums\DogamiBreed;
 
 class DogamiAttributes
 {

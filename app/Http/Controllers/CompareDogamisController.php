@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dogami;
-use Illuminate\Http\Request;
 
 class CompareDogamisController extends Controller
 {

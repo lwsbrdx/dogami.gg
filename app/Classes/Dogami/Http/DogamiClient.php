@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Classes\Dogami\Http;
 
 use App\Enums\HttpMethod;
 use GuzzleHttp\Client as GuzzleHttpClient;

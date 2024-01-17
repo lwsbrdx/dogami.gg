@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Classes\Dogami;
-
-use App\Models\Dogami;
+namespace App\Classes\Dogami\Attribute;
 
 /**
  * @property int $bonused_value

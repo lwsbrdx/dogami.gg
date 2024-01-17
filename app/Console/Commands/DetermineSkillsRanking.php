@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Classes\Dogami\DogamiSkill;
+use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Models\Dogami;
 use App\Models\DogamisRank;
 use Illuminate\Console\Command;
