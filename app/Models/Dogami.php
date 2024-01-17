@@ -119,12 +119,16 @@ class Dogami extends Model
                         return $skill;
                     }
                 }
+            case 'level':
+                return $this->attr->getLevel();
             case 'rarity':
                 return $this->attr->getRarity();
             case 'status':
                 return $this->attr->getStatus();
             case 'isBox':
                 return $this->attr->getStatus() === DogamiStatus::Box->value;
+            case 'isPuppy':
+                return $this->attr->getStatus() === DogamiStatus::Puppy->value;
             default:
                 return parent::__get($name);
         }

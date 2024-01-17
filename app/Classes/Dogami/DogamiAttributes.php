@@ -57,4 +57,12 @@ class DogamiAttributes
 
         return null;
     }
+
+    public function getLevel() {
+        foreach ($this->items as $item) {
+            if ($item->trait_type === 'Level') return $item->value;
+        }
+
+        return null;
+    }
 }

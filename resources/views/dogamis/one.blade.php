@@ -16,6 +16,13 @@
             </form>
         </div>
 
+        @if ($dogami->isPuppy)
+            <div class="flex flex-col w-fit mx-auto text-center">
+                <p>ID : {{ $dogami->nftId }}</p>
+                <p>Level : {{ $dogami->level }}</p>
+            </div>
+        @endif
+
         @if (count($dogami->skills) > 0)
             @include('components.dogami_table', $dogami)
         @endif
