@@ -54,10 +54,13 @@
                     <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
                 @endif
             @else
-                <p>
-                    {{ $skill->bonused_value }}
-                </p>
+                <p>{{ $skill->bonused_value }}</p>
             @endif
+        </div>
+
+        <div class="flex flex-row items-center gap-2">
+            <p>{{ $skill->value }}</p>
+            <p class="text-xs text-purple-400">(+{{ floor($skill->bonus/100) }})</p>
         </div>
 
         <p>
