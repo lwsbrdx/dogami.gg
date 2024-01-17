@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Classes\Dogami\DogamiAttribute;
 use App\Classes\Dogami\DogamiAttributes;
 use App\Classes\Dogami\DogamiSkill;
-use App\Classes\Dogami\DogamiStatus;
+use App\Classes\Dogami\Enums\DogamiStatus;
 use Exception;
 use MongoDB\Laravel\Eloquent\Model;
 
@@ -129,6 +129,8 @@ class Dogami extends Model
                 return $this->attr->getStatus() === DogamiStatus::Box->value;
             case 'isPuppy':
                 return $this->attr->getStatus() === DogamiStatus::Puppy->value;
+            case 'breed':
+                return $this->attr->getBreed();
             default:
                 return parent::__get($name);
         }

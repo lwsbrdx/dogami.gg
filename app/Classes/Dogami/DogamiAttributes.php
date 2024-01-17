@@ -65,4 +65,12 @@ class DogamiAttributes
 
         return null;
     }
+
+    public function getBreed() {
+        foreach ($this->items as $item) {
+            if ($item->trait_type === 'Breed') return DogamiBreed::find($item->value);
+        }
+
+        return null;
+    }
 }
