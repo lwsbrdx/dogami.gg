@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Dogami\ObjectEnums\DogamiBreed;
 use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Models\Dogami;
 use App\Models\DogamisRank;
@@ -17,12 +18,25 @@ class LeaderboardsController extends Controller
     public function show(string $skill_type, Request $request)
     {
         $skillType = $skill_type ?? '';
+        $ranksQuery = null;
+        $ranks = [];
+
+        $breed = $request->breed;
 
         if (in_array($skillType, DogamiSkill::SKILLS) === false) {
             $errors = "The specified skill does not exists";
+        } else {
+            $ranksQuery = DogamisRank::where('skill_type', $skillType);
         }
 
-        $ranks = DogamisRank::where('skill_type', $skillType)->orderBy('ranking')->paginate(5);
+        if ($ranksQuery !== null) {
+            if ($breed !== null && DogamiBreed::breedExists($breed)) {
+                $ranksQuery = $ranksQuery->where('attr.value', $breed);
+            }
+
+            /** @var DogamisRank[] $ranks */
+            $ranks = $ranksQuery->orderBy('ranking')->paginate(5);
+        }
 
         return view('leaderboards.show', [
             'errors' => empty($errors) ? null : $errors,
