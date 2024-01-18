@@ -14,12 +14,11 @@ class DogamiTreatType implements ObjectEnum
     public const MEDIUM_TREATS = 'Medium Treats';
     public const LARGE_TREATS = 'Large Treats';
 
-    public string $slug;
-
     public function __construct(
         public string $name,
         public float $average_points,
         public int $price,
+        public string $slug = '',
     ) {
         $this->slug = static::slugify($this->name);
     }

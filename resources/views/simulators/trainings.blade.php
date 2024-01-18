@@ -78,8 +78,21 @@
     </form>
 
     @if ($results !== null)
-        <p>
-            {{ $results->total_training_cost }}
-        </p>
+        <div class="px-4">
+            <p>You started with bonus : +{{ $results->starting_bonus }}</p>
+            <p>Simulation ended at bonus : +{{ $results->end_bonus }}</p>
+            @if ($results->treatType !== App\Classes\Dogami\ObjectEnums\DogamiTreatType::NO_TREATS)
+                <p>Treats used : {{ $results->treatType->name }}</p>
+            @endif
+            @if ($results->starsLeft !== INF)
+                <p>Yours stars left : {{ number_format($results->starsLeft, decimals: 0, thousands_separator: ",") }}</p>
+            @endif
+            <p>Total trainings : {{ $results->total_trainings }}</p>
+            <p>Total cost : {{ number_format($results->total_training_cost, decimals: 0, thousands_separator: ",") }}</p>
+        </div>
+
+        <div class="px-4 pt-4 text-xs text-gray-600">
+            <p>The above results are only indicative and approximate.</p>
+        </div>
     @endif
 @endsection
