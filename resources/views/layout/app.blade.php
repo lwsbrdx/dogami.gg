@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="icon" href="{{ Vite::asset('resources/assets/logo/dogamigg-favicon-color.png') }}">
+
         <title>Dogami.gg</title>
 
         <!-- Fonts -->
