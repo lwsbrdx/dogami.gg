@@ -98,8 +98,9 @@ class Dogami extends Model
     public function __get($name) {
         switch ($name) {
             case 'attr':
+                $attributes = json_decode(json_encode($this->datas['attributes']), true);
                 return new DogamiAttributes(
-                    static::dogamiAttributesToObjects($this->datas['attributes'])
+                    static::dogamiAttributesToObjects($attributes)
                 );
             case 'image':
                 $ipfsId = preg_split("/ipfs:\/\//", parent::__get($name))[1];

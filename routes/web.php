@@ -23,6 +23,7 @@ Route::post('/dogami/{dogami_id}', [DogamisController::class, 'update'])->name('
 Route::post('/dogamis/{ids}', [DogamisController::class, 'updateMany'])->name('dogamis.many.update');
 
 Route::get('/leaderboards', [LeaderboardsController::class, 'all'])->name('leaderboards');
+Route::get('/leaderboards/levels', [LeaderboardsController::class, 'orderByLevel'])->name('leaderboard.levels');
 Route::get('/leaderboards/{skill_type}', [LeaderboardsController::class, 'show'])->name('leaderboard');
 
 Route::get('/compare/{dogamis_list}', [CompareDogamisController::class, 'show'])->name('compare');
