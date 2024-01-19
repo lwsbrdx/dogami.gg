@@ -8,16 +8,30 @@ import.meta.glob([
 
 import Splide from '@splidejs/splide';
 
-const splide = new Splide('.splide.dogamis-compare', {
-    autoplay: false,
-    arrows: false,
-    pagination: true,
-    mediaQuery: 'min',
-    breakpoints: {
-        640: {
-            destroy: true
-        }
-    },
-});
+const splides = [];
+const splidesToLoad = [
+    '.splide.dogamis-compare',
+    '.splide.trainings-results',
+]
 
-splide.mount();
+document.addEventListener("DOMContentLoaded", (_) => {
+    for (let splideToLoad of splidesToLoad) {
+        if (document.querySelector(splideToLoad)) {
+            splides.push(
+                new Splide(splideToLoad, {
+                    autoplay: false,
+                    arrows: false,
+                    pagination: true,
+                    mediaQuery: 'min',
+                    breakpoints: {
+                        640: {
+                            destroy: true
+                        }
+                    },
+                })
+            );
+        }
+    }
+
+    splides.forEach(splide => splide.mount());
+});
