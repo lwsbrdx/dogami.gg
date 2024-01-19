@@ -28,7 +28,7 @@
                         <p>ID : {{ $dogamis[0]->nftId }}</p>
                         <div class="flex flex-row items-center gap-2">
                             @isset($dogamis[1])
-                                <p class="{{ $dogamis[0]->level < $dogamis[1]->level ? 'text-red-500' : 'text-green-500' }}">
+                                <p class="{{ $dogamis[0]->level < $dogamis[1]->level ? 'text-red-500' : ($dogamis[0]->level > $dogamis[1]->level ? 'text-green-500' : '') }}">
                                     Level : {{ $dogamis[0]->level }}
                                 </p>
                             @else
@@ -38,7 +38,7 @@
                             @isset($dogamis[1])
                                 @if ($dogamis[0]->level < $dogamis[1]->level)
                                     <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
-                                @else
+                                @elseif ($dogamis[0]->level > $dogamis[1]->level)
                                     <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
                                 @endif
                             @endisset
@@ -65,13 +65,13 @@
                     <div class="flex flex-col w-fit mx-auto text-center">
                         <p>ID : {{ $dogamis[1]->nftId }}</p>
                         <div class="flex flex-row items-center gap-2">
-                            <p class="{{ $dogamis[1]->level < $dogamis[0]->level ? 'text-red-500' : 'text-green-500' }}">
+                            <p class="{{ $dogamis[1]->level < $dogamis[0]->level ? 'text-red-500' : ($dogamis[1]->level > $dogamis[0]->level ? 'text-green-500' : '') }}">
                                 Level : {{ $dogamis[1]->level }}
                             </p>
 
                             @if ($dogamis[1]->level < $dogamis[0]->level)
                                 <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
-                            @else
+                            @elseif ($dogamis[1]->level > $dogamis[0]->level)
                                 <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
                             @endif
                         </div>

@@ -44,13 +44,13 @@
                 @php
                     $trait_type = strtolower($skill->trait_type);
                 @endphp
-                <p class="font-extrabold {{ $skill->bonused_value < $otherDogami->$trait_type->bonused_value ? 'text-red-500' : 'text-green-500' }}">
+                <p class="font-extrabold {{ $skill->bonused_value < $otherDogami->$trait_type->bonused_value ? 'text-red-500' : ($skill->bonused_value > $otherDogami->$trait_type->bonused_value ? 'text-green-500' : '') }}">
                     {{ $skill->bonused_value }}
                 </p>
 
                 @if ($skill->bonused_value < $otherDogami->$trait_type->bonused_value)
                     <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
-                @else
+                @elseif ($skill->bonused_value > $otherDogami->$trait_type->bonused_value)
                     <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
                 @endif
             @else
