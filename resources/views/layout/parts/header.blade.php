@@ -9,8 +9,8 @@
         <a href="{{ route('leaderboards') }}" class="font-bold">
             🏆 Leaderboards
         </a>
-        <a href="#" class="font-bold">
-            🔀 Compare Dogamis 🚧
+        <a href="{{ route('compare') }}" class="font-bold">
+            🔀 Compare Dogamis
         </a>
     </div>
 </header>

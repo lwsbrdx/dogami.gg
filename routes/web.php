@@ -26,7 +26,7 @@ Route::get('/leaderboards', [LeaderboardsController::class, 'all'])->name('leade
 Route::get('/leaderboards/levels', [LeaderboardsController::class, 'orderByLevel'])->name('leaderboard.levels');
 Route::get('/leaderboards/{skill_type}', [LeaderboardsController::class, 'show'])->name('leaderboard');
 
-Route::get('/compare/{dogamis_list}', [CompareDogamisController::class, 'show'])->name('compare');
+Route::get('/compare/{dogamis_list?}', [CompareDogamisController::class, 'show'])->name('compare');
 
 Route::match(
     ['get', 'post'],

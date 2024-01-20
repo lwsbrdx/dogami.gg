@@ -1,10 +1,13 @@
 import './bootstrap';
+import "/node_modules/select2/dist/css/select2.css";
 import '@splidejs/splide/dist/css/splide.min.css';
 import '@splidejs/splide/dist/js/splide';
 
 import.meta.glob([
     '../assets/**',
 ]);
+
+import './dogamis-selector/main';
 
 import Splide from '@splidejs/splide';
 

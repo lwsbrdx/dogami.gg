@@ -17,10 +17,10 @@ class DogamisController extends BaseController
             $dogamis = Dogami::where('nftId', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%");
         } else {
-            $dogamis = Dogami::orderBy('nftId');
+            $dogamis = Dogami::query();
         }
 
-        $dogamis = $dogamis->paginate(24);
+        $dogamis = $dogamis->orderBy('nftId')->paginate(24);
 
         return view('dogamis.all', [
             'dogamis' => $dogamis,
