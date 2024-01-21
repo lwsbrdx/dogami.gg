@@ -13,6 +13,8 @@ class DogamisController extends BaseController
     public function all(Request $request)
     {
         $search = $request->search;
+        $breed = $request->breed;
+
         if ($search != null) {
             $dogamis = Dogami::where('nftId', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%");
@@ -20,11 +22,16 @@ class DogamisController extends BaseController
             $dogamis = Dogami::query();
         }
 
+        if ($breed) {
+            $dogamis = $dogamis->where('attr.trait_type', 'Breed')->where('attr.value', $breed);
+        }
+
         $dogamis = $dogamis->orderBy('nftId')->paginate(24);
 
         return view('dogamis.all', [
             'dogamis' => $dogamis,
             'search' => $search ?? '',
+            'breed' => $breed,
         ]);
     }
 
