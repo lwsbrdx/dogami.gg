@@ -11,8 +11,8 @@
 
     <select name="breed" class="h-10 w-56 m-3 pl-2 pr-5 appearance-none border border-[#2d123b] rounded-md focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm">
         <option value="">Breed Filter...</option>
-        @foreach (\App\Classes\Dogami\ObjectEnums\DogamiBreed::all() as $breed)
-            <option value="{{ $breed->name }}">{{ $breed->name }}</option>
+        @foreach (\App\Classes\Dogami\ObjectEnums\DogamiBreed::all() as $dogamiBreed)
+            <option value="{{ $dogamiBreed->name }}" @if ($dogamiBreed->name === $breed) selected @endif>{{ $dogamiBreed->name }}</option>
         @endforeach
     </select>
 

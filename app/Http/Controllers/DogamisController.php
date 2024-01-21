@@ -16,8 +16,10 @@ class DogamisController extends BaseController
         $breed = $request->breed;
 
         if ($search != null) {
+            $lowerCaseSearch = strtolower($search);
             $dogamis = Dogami::where('nftId', 'LIKE', "%$search%")
-                ->orWhere('name', 'LIKE', "%$search%");
+                ->orWhere('name', 'LIKE', "%$search%")
+                ->orWhere('owner', 'LIKE', "%$lowerCaseSearch%");
         } else {
             $dogamis = Dogami::query();
         }
