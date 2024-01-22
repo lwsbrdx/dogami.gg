@@ -6,6 +6,7 @@ use App\Classes\Dogami\Attribute\DogamiAttribute;
 use App\Classes\Dogami\Attribute\DogamiAttributes;
 use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Classes\Dogami\Enums\DogamiStatus;
+use App\Classes\Dogami\ObjectEnums\DogamiBreed;
 use MongoDB\Laravel\Eloquent\Model;
 use Exception;
 
@@ -22,6 +23,7 @@ use Exception;
  * @property DogamiAttributes attr
  *
  * @property bool isBox
+ * @property ?DogamiBreed breed
  * @property DogamiSkill[] skills
  */
 class Dogami extends Model
