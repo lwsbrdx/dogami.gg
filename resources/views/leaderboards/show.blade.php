@@ -6,6 +6,14 @@
 @if($errors)
 <h1 class="text-center">{{ $errors }}</h1>
 @else
+<div class="mt-6 sm:flex sm:flex-row sm:justify-end">
+    @include('components.forms.dogamis_search', [
+        "form_action" => route('leaderboard', app('request')->skill_type),
+        "options" => [
+            "can_search" => false
+        ],
+    ])
+</div>
 <div>
     @foreach ($ranks ?? [] as $rank)
     <div class="flex flex-col flex-wrap justify-center py-4">
@@ -28,8 +36,12 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 justify-items-center gap-y-4">
-            @foreach ($rank->dogamis as $dogami_id)
-                @include('components.dogami_card', ['dogami' => \App\Models\Dogami::findOrFail($dogami_id)])
+            @foreach ($rank->dogamis as $dogami_info)
+                @if (empty($breed) === false && $dogami_info['breed'] !== $breed)
+                    @continue
+                @endif
+
+                @include('components.dogami_card', ['dogami' => \App\Models\Dogami::findOrFail($dogami_info['id'])])
             @endforeach
         </div>
     </div>

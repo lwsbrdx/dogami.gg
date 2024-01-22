@@ -46,7 +46,10 @@ class DetermineSkillsRanking extends Command
                 $values[$dogamiSkill->bonused_value] = [
                     'dogamis' => [
                         ...($values[$dogamiSkill->bonused_value]['dogamis'] ?? []),
-                        $dogami->nftId
+                        [
+                            "id" => $dogami->nftId,
+                            "breed" => $dogami->breed->name,
+                        ]
                     ]
                 ];
             }
@@ -58,6 +61,7 @@ class DetermineSkillsRanking extends Command
             foreach ($values as $skill_value => $value) {
                 $dogamiRank = new DogamisRank;
                 $dogamiRank->ranking = $i;
+                $dogamiRank->value_type = DogamisRank::ACTUAL_VALUE;
                 $dogamiRank->skill_type = $skill;
                 $dogamiRank->skill_value = $skill_value;
                 $dogamiRank->dogamis = $value['dogamis'];

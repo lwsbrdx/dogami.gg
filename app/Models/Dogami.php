@@ -84,7 +84,7 @@ class Dogami extends Model
             throw new Exception("$skill_name is not a valid skill");
         }
 
-        return DogamisRank::where('skill_type', $skill_name)->where('dogamis', $this->nftId)->first();
+        return DogamisRank::where('skill_type', $skill_name)->where('dogamis.id', $this->nftId)->first();
     }
 
     public function save(array $options = []) {

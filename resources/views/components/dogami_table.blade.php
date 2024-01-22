@@ -70,7 +70,9 @@
                 N/A
             @endif
         </p>
-        <p>({{ count($rank->dogamis) - 1 }} ties)</p>
+        @if ($rank)
+            <p>({{ count($rank->dogamis) - 1 }} ties)</p>
+        @endif
     </div>
     @endforeach
 

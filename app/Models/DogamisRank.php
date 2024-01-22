@@ -15,6 +15,9 @@ use MongoDB\Laravel\Eloquent\Model;
  * @property int[] $dogamis
  */
 class DogamisRank extends Model {
+    public const ACTUAL_VALUE = 'actual';
+    public const MAX_VALUE = 'max';
+
     protected $primaryKey = 'ranking';
     protected $keyType = 'int';
     public $incrementing = false;

@@ -17,17 +17,28 @@ class LeaderboardsController extends Controller
     public function show(string $skill_type, Request $request)
     {
         $skillType = $skill_type ?? '';
+        $search = $request->search;
+        $breed = $request->breed;
 
         if (in_array($skillType, DogamiSkill::SKILLS) === false) {
             $errors = "The specified skill does not exists";
         }
 
-        $ranks = DogamisRank::where('skill_type', $skillType)->orderBy('ranking')->paginate(5);
+        $ranks = DogamisRank::query()->where('skill_type', $skillType);
+
+        if ($breed) {
+            $ranks = $ranks->where('dogamis.breed', $breed);
+        }
+
+        $ranks = $ranks->orderBy('ranking')
+            ->paginate(5);
 
         return view('leaderboards.show', [
             'errors' => empty($errors) ? null : $errors,
             'skillType' => $skillType,
-            'ranks' => $ranks
+            'ranks' => $ranks,
+            'search' => $search,
+            'breed' => $breed,
         ]);
     }
 
