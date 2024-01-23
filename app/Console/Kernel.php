@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('dogamis:update:all')->everyTwoHours();
+        $schedule->command('dogamis:update:all')->everyFourHours();
     }
 
     /**
