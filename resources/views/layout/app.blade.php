@@ -16,7 +16,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="antialiased bg-[#230235]">
-        <div class="min-h-screen text-gray-500 dark:text-gray-400 bg-dots-darker bg-center bg-[#230235] dark:bg-dots-lighter selection:bg-purple-500 selection:text-white">
+        <div class="min-h-screen text-gray-500 dark:text-gray-400 bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-purple-500 selection:text-white">
             @include('layout.parts.header')
 
             <main class="max-w-[1280px] mx-auto py-5">
