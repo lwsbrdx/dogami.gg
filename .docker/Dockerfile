@@ -33,7 +33,8 @@ RUN apt install -y \
     php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-intl \
     php${PHP_VERSION}-fpm \
-    php${PHP_VERSION}-mongodb
+    php${PHP_VERSION}-mongodb \
+    php${PHP_VERSION}-xml
 RUN mkdir -p /run/php
 RUN sed -i \
         -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" \
