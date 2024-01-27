@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\CompareDogamisController;
+use App\Http\Controllers\DesignSystemController;
 use App\Http\Controllers\DogamisController;
 use App\Http\Controllers\LeaderboardsController;
 use App\Http\Controllers\SimulatorsController;
+use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/design', [DesignSystemController::class, 'index']);
 
 Route::get('/', [DogamisController::class, 'all'])->name('home');
 Route::get('/dogami/{dogami_id}', [DogamisController::class, 'one'])->name('dogamis.one');
@@ -33,4 +37,3 @@ Route::match(
     '/simulators/skills-trainings',
     [SimulatorsController::class, 'trainings']
 )->name('simulators.training.skills');
-

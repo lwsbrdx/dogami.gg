@@ -15,7 +15,7 @@
         <!-- Styles -->
         @vite('resources/css/app.css')
     </head>
-    <body class="antialiased bg-[#230235]">
+    <body class="antialiased px-6">
         <div class="min-h-screen text-gray-500 dark:text-gray-400 bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-purple-500 selection:text-white">
             @include('layout.parts.header')
 
