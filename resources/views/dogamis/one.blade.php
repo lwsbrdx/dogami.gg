@@ -30,7 +30,11 @@
         @endif
 
         @if (count($dogami->skills) > 0)
-            @include('components.dogami_table', $dogami)
+            <div class="mx-auto max-w-fit mt-8">
+                @livewire('dogami-skills', [
+                    "dogami" => $dogami,
+                ])
+            </div>
         @endif
     @else
         <div>

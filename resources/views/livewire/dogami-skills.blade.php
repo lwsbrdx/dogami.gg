@@ -1,9 +1,12 @@
 @php
-    $dogami = $dogami ?? App\Models\Dogami::find(11611);
+    $dogami = $dogami ?? null;
+    if ($dogami === null) {
+        throw new Exception("Dogami can't be null");
+    }
     $skills = $skills ?? $dogami->skills;
 @endphp
 
-<div class="bg-[#230235] shadow-inner max-w-[650px] shadow-[#0d0810] border border-[#ffffff1a] rounded-xl p-4 grid grid-cols-2 min-[600px]:grid-cols-3 gap-x-2 gap-y-4 justify-items-center">
+<div class="bg-[#230235] shadow-inner max-w-[650px] min-[600px]:min-w-[650px] shadow-[#0d0810] border border-[#ffffff1a] rounded-xl p-4 grid grid-cols-2 min-[600px]:grid-cols-3 gap-x-2 gap-y-4 justify-items-center">
     @foreach ($skills as $skill)
         @php
             $bonus_value = floor($skill->bonus/100);
@@ -36,7 +39,7 @@
             }
         @endphp
 
-        <div class="text-center px-2 max-w-36 text-xs flex flex-col items-center relative">
+        <div wire:key="{{ $skill->trait_type }}" class="text-center px-2 max-w-36 text-xs flex flex-col items-center relative">
             <div class="absolute opacity-30 rounded-full -top-1 backdrop-blur-2xl backdrop-filter {{ $classes }}"></div>
             <img class="w-12 text-transparent" src="{{ Vite::asset("resources/assets/images/skills/$skill_name.png") }}" alt="">
             <div>{{ $skill->trait_type }}</div>
