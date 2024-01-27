@@ -11,25 +11,25 @@
             $skill_name = $skill->trait_type_lower;
             $skill_color = App\Classes\Dogami\Attribute\DogamiSkill::SKILLS_COLORS[$skill_name];
 
-            $classes = 'shadow-lg ';
+            $classes = 'shadow-custom ';
             switch ($skill_color) {
                 case 'yellow':
-                    $classes .= 'shadow-yellow';
+                    $classes .= 'shadow-cyellow';
                     break;
                 case 'red':
-                    $classes .= 'shadow-red';
+                    $classes .= 'shadow-cred';
                     break;
                 case 'blue':
-                    $classes .= 'shadow-blue';
+                    $classes .= 'shadow-cblue';
                     break;
                 case 'green':
-                    $classes .= 'shadow-green';
+                    $classes .= 'shadow-cgreen';
                     break;
                 case 'purple':
-                    $classes .= 'shadow-purple';
+                    $classes .= 'shadow-cpurple';
                     break;
                 case 'orange':
-                    $classes .= 'shadow-orange';
+                    $classes .= 'shadow-corange';
                     break;
                 default:
                     break;
