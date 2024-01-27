@@ -4,6 +4,7 @@ namespace App\Classes\Dogami\Attribute;
 
 /**
  * @property int $bonused_value
+ * @property string $trait_type_lower
  */
 class DogamiSkill extends DogamiAttribute
 {
@@ -56,6 +57,8 @@ class DogamiSkill extends DogamiAttribute
 
     public function __get($name) {
         switch ($name) {
+            case 'trait_type_lower':
+                return strtolower($this->trait_type);
             case 'bonused_value':
                 return (int) ($this->value + floor($this->bonus/100));
             default:
