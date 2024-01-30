@@ -66,10 +66,12 @@
                     @endif
 
                     @if (count($dogamis[0]->skills) > 0)
-                        @include('components.dogami_table', [
-                            'dogami' => $dogamis[0],
-                            'otherDogami' => $dogamis[1] ?? null
-                        ])
+                        <div class="mt-6">
+                            @include('components.dogami-skills', [
+                                'dogami' => $dogamis[0],
+                                'other_dogami' => $dogamis[1] ?? null
+                            ])
+                        </div>
                     @endif
                 @endif
             </div>
@@ -99,10 +101,12 @@
                     @endif
 
                     @if (count($dogamis[1]->skills) > 0)
-                        @include('components.dogami_table', [
-                            'dogami' => $dogamis[1],
-                            'otherDogami' => $dogamis[0]
-                        ])
+                        <div class="mt-6">
+                            @include('components.dogami-skills', [
+                                'dogami' => $dogamis[1],
+                                'other_dogami' => $dogamis[0]
+                            ])
+                        </div>
                     @endif
                 </div>
             @endif

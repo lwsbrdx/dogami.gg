@@ -72,10 +72,6 @@ class DetermineSkillsRanking extends Command
             }
             // plus besoin de ce tableau, on vide la mémoire
             unset($values);
-
-            dump("Ranking for $skill done");
         }
-
-        dump("All rankings calculated");
     }
 }
