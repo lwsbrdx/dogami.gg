@@ -2,6 +2,7 @@
 $tag = 'button';
 $link = $link ?? '';
 $label = $label ?? 'Label';
+$disabled = $disabled ?? false;
 $attributes = $attributes ?? [];
 $attributes_string = '';
 
@@ -12,24 +13,14 @@ $attributes_string = rtrim($attributes_string);
 
 if ($link) {
     $tag = 'a';
-    $attributes_string = "href='$link' target='_blank' " . $attributes_string;
+    $attributes_string = "href=$link target=_blank $attributes_string";
 }
-
 @endphp
 
 <{{ $tag }}
+{{ $disabled ? 'disabled=disabled'  : '' }}
 {{ $attributes_string }}
-class="@formatclasses("
-    min-w-32 h-11
-    px-4
-    inline-block
-    bg-[#230235] hover:bg-[#2b0c3d] active:bg-[#230235]
-    active:outline-none active:ring-1 active:ring-[#4d335c]
-    border border-[#ffffff1a] rounded-md
-    leading-10
-    transition ease-in-out duration-200
-")">
+class="disabled:opacity-60 disabled:cursor-not-allowed min-w-32 h-11 px-4 inline-block bg-[#230235] enabled:hover:bg-[#2b0c3d] enabled:active:bg-[#230235] enabled:active:outline-none enabled:active:ring-1 enabled:active:ring-[#4d335c] border border-[#ffffff1a] rounded-md leading-10 transition ease-in-out duration-200">
     {{ $label }}
-
 </{{ $tag }}>
 

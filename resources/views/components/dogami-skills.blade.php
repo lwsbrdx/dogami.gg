@@ -3,13 +3,20 @@
     $other_dogami = $other_dogami ?? null;
     $isComparing = $other_dogami !== null;
 
+    $attributes = $attributes ?? [];
+    $attributes_string = '';
+    foreach ($attributes as $attribute => $value) {
+        $attributes_string .= $attribute . ($value ? "=$value " : ' ');
+    }
+    $attributes_string = rtrim($attributes_string);
+
     if ($dogami === null) {
         throw new Exception("Dogami can't be null");
     }
     $skills = $skills ?? $dogami->skills;
 @endphp
 
-<div class="bg-[#230235] shadow-inner w-full max-w-[600px] min-[600px]:min-w-[550px] shadow-[#0d0810] border border-[#ffffff1a] rounded-xl p-4 grid grid-cols-2 min-[600px]:grid-cols-3 gap-x-2 gap-y-4 justify-items-center">
+<div {{ $attributes_string }} class="bg-[#230235] shadow-inner w-full max-w-[600px] min-[600px]:min-w-[550px] shadow-[#0d0810] border border-[#ffffff1a] rounded-xl p-4 grid grid-cols-2 min-[600px]:grid-cols-3 gap-x-2 gap-y-4 justify-items-center">
     @foreach ($skills as $skill)
         @php
             $skill_name = $skill->trait_type_lower;
@@ -56,7 +63,7 @@
             }
         @endphp
 
-        <div class="text-center px-2 max-w-36 text-xs flex flex-col items-center relative">
+        <div wire:key="{{ $skill->trait_type_lower }}" class="text-center px-2 max-w-36 text-xs flex flex-col items-center relative">
             <div class="absolute opacity-30 rounded-full -top-1 backdrop-blur-2xl backdrop-filter {{ $classes }}"></div>
             <img class="w-12 text-transparent" src="{{ Vite::asset("resources/assets/images/skills/$skill_name.png") }}" alt="">
             <div>{{ $skill->trait_type }}</div>

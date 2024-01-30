@@ -16,7 +16,7 @@
                 'label' => 'Update this Dogami',
                 'attributes' => [
                     'wire:click' => 'update',
-                    'coucou' => 'test'
+                    'wire:loading.attr' => 'disabled',
                 ]
             ])
         </div>
@@ -30,7 +30,13 @@
 
         @if (count($dogami->skills) > 0)
             <div class="flex flex-row items-center justify-center mt-8">
-                @include('components.dogami-skills', ["dogami" => $dogami])
+                @include('components.dogami-skills', [
+                    "dogami" => $dogami,
+                    "attributes" => [
+                        'wire:loading.class' => "opacity-60",
+                        'wire:target' => 'update'
+                    ]
+                ])
             </div>
         @endif
     @else
