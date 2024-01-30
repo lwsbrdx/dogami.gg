@@ -5,8 +5,6 @@ select2(window, $);
 const selector_class = '.dogamis-selector';
 
 function formatState(dogami) {
-    console.log(dogami);
-
     if (!dogami.id) {
         return dogami.text;
     }
@@ -28,6 +26,7 @@ document.addEventListener("DOMContentLoaded", (_) => {
     }
 
     $(selector_class).select2({
+        minimumInputLength: 1,
         templateResult: formatState,
         ajax: {
             url: '/api/search',
