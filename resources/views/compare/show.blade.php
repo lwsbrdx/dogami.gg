@@ -12,9 +12,9 @@
                     <option selected disabled>Search a DOGAMI...</option>
                 </select>
             </div>
-            <button class="bg-[#2d123b] transition border border-[#2d123b] active:border-gray-400 px-6 py-2 rounded-md">
-                Validate
-            </button>
+            @include('components.button', [
+                'label' => 'Validate',
+            ])
         </form>
     </div>
 
@@ -24,9 +24,9 @@
             ]
         ) }}" method="post" class="mx-auto">
             @csrf
-            <button class="bg-[#2d123b] transition border border-[#2d123b] active:border-gray-400 px-6 py-2 rounded-md">
-                Update Dogamis
-            </button>
+            @include('components.button', [
+                'label' => 'Update Dogamis',
+            ])
         </form>
     @endif
 </div>
