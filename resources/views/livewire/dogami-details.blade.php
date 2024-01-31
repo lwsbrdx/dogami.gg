@@ -32,6 +32,7 @@
             <div class="flex flex-row items-center justify-center mt-8">
                 @include('components.dogami-skills', [
                     "dogami" => $dogami,
+                    "use_max_values" => $use_max_values,
                     "attributes" => [
                         'wire:loading.class' => "opacity-60",
                         'wire:target' => 'update'

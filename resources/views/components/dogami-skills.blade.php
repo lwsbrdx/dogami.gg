@@ -1,8 +1,11 @@
+@use(\App\Models\DogamisRank)
+
 @php
     $dogami = $dogami ?? null;
     $other_dogami = $other_dogami ?? null;
     $isComparing = $other_dogami !== null;
 
+    $use_max_values = $use_max_values ?? false;
     $attributes = $attributes ?? [];
     $attributes_string = '';
     foreach ($attributes as $attribute => $value) {
@@ -21,7 +24,7 @@
         @php
             $skill_name = $skill->trait_type_lower;
             $bonus_value = floor($skill->bonus/100);
-            $skill_ranking = $dogami->getSkillRank($skill->trait_type);
+            $skill_ranking = $dogami->getSkillRank($skill->trait_type, $use_max_values ? DogamisRank::MAX_VALUE : DogamisRank::ACTUAL_VALUE);
             $skill_color = App\Classes\Dogami\Attribute\DogamiSkill::SKILLS_COLORS[$skill_name];
             $skill_rank = \App\Classes\Dogami\Enums\DogamiSkillRank::find($skill->rank);
             $skill_rank_is_boosted = $skill_rank->value > $dogami->breed->profile[strtolower($skill->trait_type)]->value;
@@ -105,18 +108,28 @@
                 @endif
 
                 <p class="font-extrabold {{ $text_classes ?? '' }}">
-                    {{ $skill->bonused_value }}
+                    {{ $use_max_values ? $skill->max_bonused_value : $skill->bonused_value }}
                 </p>
 
                 @if ($isComparing)
-                    @if ($skill->bonused_value < $other_dogamiSkill->bonused_value)
-                        <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
-                    @elseif ($skill->bonused_value > $other_dogamiSkill->bonused_value)
-                        <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
+                    @if ($use_max_values)
+                        @if ($skill->max_bonused_value < $other_dogamiSkill->max_bonused_value)
+                            <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
+                        @elseif ($skill->max_bonused_value > $other_dogamiSkill->max_bonused_value)
+                            <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
+                        @endif
+                    @else
+                        @if ($skill->bonused_value < $other_dogamiSkill->bonused_value)
+                            <div class="w-0 h-0 border border-b-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-red-500"></div>
+                        @elseif ($skill->bonused_value > $other_dogamiSkill->bonused_value)
+                            <div class="w-0 h-0 border border-t-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-8 border-b-green-500"></div>
+                        @endif
                     @endif
                 @endif
             </div>
-            <div>{{ $skill->value }} <span class="text-[#9146b6]">(+{{ $bonus_value }})</span></div>
+            @if ($use_max_values === false)
+                <div>{{ $skill->value }} <span class="text-[#9146b6]">(+{{ $bonus_value }})</span></div>
+            @endif
             <div>{{ $skill_ranking->ranking }} / {{ App\Models\DogamisRank::totalRanksForSkill($skill->trait_type) }}</div>
             <div>({{ count($skill_ranking->dogamis) - 1 }} ties)</div>
         </div>

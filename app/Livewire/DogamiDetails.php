@@ -10,10 +10,12 @@ use Livewire\Component;
 class DogamiDetails extends Component
 {
     public Dogami $dogami;
+    public bool $use_max_values;
 
-    public function mount(?Dogami $dogami)
+    public function mount(?Dogami $dogami, bool $use_max_values = false)
     {
         $this->dogami = $dogami;
+        $this->use_max_values = $use_max_values;
     }
 
     public function render()

@@ -7,14 +7,14 @@ use App\Models\Dogami;
 use App\Models\DogamisRank;
 use Illuminate\Console\Command;
 
-class DetermineSkillsRanking extends Command
+class DetermineMaxSkillsRanking extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'dogamis:skills:rankings:actual';
+    protected $signature = 'dogamis:skills:rankings:max';
 
     /**
      * The console command description.
@@ -28,9 +28,9 @@ class DetermineSkillsRanking extends Command
      */
     public function handle()
     {
-        ini_set('memory_limit', '512M');
+        ini_set('memory_limit', '1G');
 
-        $toDelete = DogamisRank::where('value_type', DogamisRank::ACTUAL_VALUE)->delete();
+        $toDelete = DogamisRank::where('value_type', DogamisRank::MAX_VALUE)->delete();
         unset($toDelete);
 
         $dogamis = Dogami::all();
@@ -46,9 +46,10 @@ class DetermineSkillsRanking extends Command
 
                 /** @var DogamiSkill $dogamiSkill */
                 $dogamiSkill = $dogami->$skill;
-                $values[$dogamiSkill->bonused_value] = [
+
+                $max_values[$dogamiSkill->max_bonused_value] = [
                     'dogamis' => [
-                        ...($values[$dogamiSkill->bonused_value]['dogamis'] ?? []),
+                        ...($max_values[$dogamiSkill->max_bonused_value]['dogamis'] ?? []),
                         [
                             "id" => $dogami->nftId,
                             "breed" => $dogami->breed->name,
@@ -57,14 +58,14 @@ class DetermineSkillsRanking extends Command
                 ];
             }
             // 1. b) Trier par valeur de la compétence, du plus grand au plus petit
-            krsort($values);
+            krsort($max_values);
 
             // 2. Création des rankings à mettre en bdd
             $i = 1;
-            foreach ($values as $skill_value => $value) {
+            foreach ($max_values as $skill_value => $value) {
                 $dogamiRank = new DogamisRank;
                 $dogamiRank->ranking = $i;
-                $dogamiRank->value_type = DogamisRank::ACTUAL_VALUE;
+                $dogamiRank->value_type = DogamisRank::MAX_VALUE;
                 $dogamiRank->skill_type = $skill;
                 $dogamiRank->skill_value = $skill_value;
                 $dogamiRank->dogamis = $value['dogamis'];
@@ -74,7 +75,7 @@ class DetermineSkillsRanking extends Command
                 $i++;
             }
             // plus besoin de ce tableau, on vide la mémoire
-            unset($values);
+            unset($max_values);
         }
     }
 }

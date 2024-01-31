@@ -79,14 +79,17 @@ class Dogami extends Model
         return false;
     }
 
-    public function getSkillRank(string $skill_name): ?DogamisRank
+    public function getSkillRank(string $skill_name, string $rank_type = DogamisRank::ACTUAL_VALUE): ?DogamisRank
     {
         $skill_name = strtolower($skill_name);
         if (in_array($skill_name, DogamiSkill::SKILLS, true) === false) {
             throw new Exception("$skill_name is not a valid skill");
         }
 
-        return DogamisRank::where('skill_type', $skill_name)->where('dogamis.id', $this->nftId)->first();
+        return DogamisRank::where('skill_type', $skill_name)
+            ->where('dogamis.id', $this->nftId)
+            ->where('value_type', $rank_type)
+            ->first();
     }
 
     public function save(array $options = []) {

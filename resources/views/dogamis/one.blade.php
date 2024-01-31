@@ -2,6 +2,7 @@
 
 @section('content')
     @livewire('dogami-details', [
-        'dogami' => $dogami ?? null
+        'dogami' => $dogami ?? null,
+        'use_max_values' => $use_max_values,
     ])
 @endsection

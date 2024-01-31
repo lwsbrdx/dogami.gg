@@ -39,10 +39,12 @@ class DogamisController extends BaseController
 
     public function one(int $dogami_id, Request $request)
     {
+        $useMaxValues = (bool) $request->use_max;
         $dogami = Dogami::find($dogami_id);
 
         return view('dogamis.one', [
             'dogami' => $dogami,
+            'use_max_values' => $useMaxValues,
         ]);
     }
 
