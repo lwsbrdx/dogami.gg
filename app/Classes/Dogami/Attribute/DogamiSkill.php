@@ -4,6 +4,7 @@ namespace App\Classes\Dogami\Attribute;
 
 /**
  * @property int $bonused_value
+ * @property int $max_bonused_value
  * @property string $trait_type_lower
  */
 class DogamiSkill extends DogamiAttribute
@@ -33,6 +34,8 @@ class DogamiSkill extends DogamiAttribute
         self::INSTINCT => 'purple',
     ];
 
+    public const MAX_BONUS = 200;
+
     public bool $isSkill = true;
 
     public int $min_value;
@@ -61,6 +64,8 @@ class DogamiSkill extends DogamiAttribute
                 return strtolower($this->trait_type);
             case 'bonused_value':
                 return (int) ($this->value + floor($this->bonus/100));
+            case 'max_bonused_value':
+                return (int) ($this->max_value + self::MAX_BONUS);
             default:
                 return $this->$name;
         }

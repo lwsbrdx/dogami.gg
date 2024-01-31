@@ -52,9 +52,20 @@ class DetermineSkillsRanking extends Command
                         ]
                     ]
                 ];
+
+                $max_values[$dogamiSkill->max_bonused_value] = [
+                    'dogamis' => [
+                        ...($values[$dogamiSkill->max_bonused_value]['dogamis'] ?? []),
+                        [
+                            "id" => $dogami->nftId,
+                            "breed" => $dogami->breed->name,
+                        ]
+                    ]
+                ];
             }
             // 1. b) Trier par valeur de la compétence, du plus grand au plus petit
             krsort($values);
+            krsort($max_values);
 
             // 2. Création des rankings à mettre en bdd
             $i = 1;
@@ -72,6 +83,21 @@ class DetermineSkillsRanking extends Command
             }
             // plus besoin de ce tableau, on vide la mémoire
             unset($values);
+
+            $i = 1;
+            foreach ($max_values as $skill_value => $value) {
+                $dogamiRank = new DogamisRank;
+                $dogamiRank->ranking = $i;
+                $dogamiRank->value_type = DogamisRank::MAX_VALUE;
+                $dogamiRank->skill_type = $skill;
+                $dogamiRank->skill_value = $skill_value;
+                $dogamiRank->dogamis = $value['dogamis'];
+
+                $dogamiRank->save();
+
+                $i++;
+            }
+            unset($max_values);
         }
     }
 }
