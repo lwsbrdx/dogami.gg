@@ -52,7 +52,8 @@ class DogamisController extends BaseController
         $dogami = $dogamiService->fetchDogami($dogami_id);
         $dogami->save();
 
-        Artisan::call('dogamis:skills:rankings');
+        Artisan::call('dogamis:skills:rankings:actual');
+        Artisan::call('dogamis:skills:rankings:max');
 
         return redirect()->route('dogamis.one', [$dogami->nftId]);
     }
@@ -68,7 +69,8 @@ class DogamisController extends BaseController
             }
         }
 
-        Artisan::call('dogamis:skills:rankings');
+        Artisan::call('dogamis:skills:rankings:actual');
+        Artisan::call('dogamis:skills:rankings:max');
 
         return redirect()->route('compare', $dogamis_ids);
     }

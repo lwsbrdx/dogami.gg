@@ -28,6 +28,7 @@ class DogamiDetails extends Component
         $this->dogami = $dogamiService->fetchDogami($this->dogami->nftId);
         $this->dogami->save();
 
-        Artisan::call('dogamis:skills:rankings');
+        Artisan::call('dogamis:skills:rankings:actual');
+        Artisan::call('dogamis:skills:rankings:max');
     }
 }

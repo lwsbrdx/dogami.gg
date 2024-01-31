@@ -40,6 +40,7 @@ class UpdateAllDogamis extends Command
 
         dump("All DOGAMIs updated");
 
-        $this->call('dogamis:skills:rankings');
+        $this->call('dogamis:skills:rankings:actual');
+        $this->call('dogamis:skills:rankings:max');
     }
 }
