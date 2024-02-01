@@ -28,6 +28,15 @@
             </div>
         @endif
 
+        <div class="max-w-fit mx-auto mt-4">
+            @include('components.button', [
+                'label' => $use_max_values ? 'Use actual values' : 'Use max values',
+                'attributes' => [
+                    'wire:click' => 'toggleUseMax'
+                ]
+            ])
+        </div>
+
         @if (count($dogami->skills) > 0)
             <div class="flex flex-row items-center justify-center mt-8">
                 @include('components.dogami-skills', [

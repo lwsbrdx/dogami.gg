@@ -31,4 +31,8 @@ class DogamiDetails extends Component
         Artisan::call('dogamis:skills:rankings:actual');
         Artisan::call('dogamis:skills:rankings:max');
     }
+
+    public function toggleUseMax() {
+        $this->use_max_values = !$this->use_max_values;
+    }
 }
