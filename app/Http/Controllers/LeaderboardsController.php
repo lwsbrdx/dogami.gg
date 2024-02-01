@@ -24,7 +24,8 @@ class LeaderboardsController extends Controller
             $errors = "The specified skill does not exists";
         }
 
-        $ranks = DogamisRank::query()->where('skill_type', $skillType);
+        $ranks = DogamisRank::where('skill_type', $skillType)
+            ->where('value_type', DogamisRank::ACTUAL_VALUE);
 
         if ($breed) {
             $ranks = $ranks->where('dogamis.breed', $breed);
