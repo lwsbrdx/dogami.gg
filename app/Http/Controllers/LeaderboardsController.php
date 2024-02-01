@@ -19,13 +19,14 @@ class LeaderboardsController extends Controller
         $skillType = $skill_type ?? '';
         $search = $request->search;
         $breed = $request->breed;
+        $use_max_values = (bool) $request->use_max;
 
         if (in_array($skillType, DogamiSkill::SKILLS) === false) {
             $errors = "The specified skill does not exists";
         }
 
         $ranks = DogamisRank::where('skill_type', $skillType)
-            ->where('value_type', DogamisRank::ACTUAL_VALUE);
+            ->where('value_type', $use_max_values ? DogamisRank::MAX_VALUE : DogamisRank::ACTUAL_VALUE);
 
         if ($breed) {
             $ranks = $ranks->where('dogamis.breed', $breed);
