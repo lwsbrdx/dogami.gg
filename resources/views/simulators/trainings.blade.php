@@ -72,9 +72,11 @@
                 />
             </label>
 
-            <button class="mx-auto bg-[#2d123b] rounded-md w-full max-w-32 sm:max-w-40 h-11 px-2 py-1">
-                Simulate
-            </button>
+            <div class="mx-auto max-w-32 sm:max-w-40">
+                @include('components.button', [
+                    'label' => 'Simulate',
+                ])
+            </div>
         </div>
     </form>
 
