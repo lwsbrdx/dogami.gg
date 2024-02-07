@@ -69,7 +69,7 @@
                         <div class="mt-6">
                             @include('components.dogami-skills', [
                                 'dogami' => $dogamis[0],
-                                'other_dogami' => $dogamis[1] ?? null
+                                'other_dogami' => (count($dogamis[1]->skills) > 0 ? $dogamis[1] : null)
                             ])
                         </div>
                     @endif
@@ -104,7 +104,7 @@
                         <div class="mt-6">
                             @include('components.dogami-skills', [
                                 'dogami' => $dogamis[1],
-                                'other_dogami' => $dogamis[0]
+                                'other_dogami' => (count($dogamis[0]->skills) > 0 ? $dogamis[0] : null)
                             ])
                         </div>
                     @endif

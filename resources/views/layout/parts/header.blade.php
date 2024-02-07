@@ -6,5 +6,6 @@
         <a href="{{ route('home') }}" class="font-bold">Home</a>
         <a href="{{ route('leaderboards') }}" class="font-bold">Leaderboards</a>
         <a href="{{ route('compare') }}" class="font-bold">Compare Dogamis</a>
+        <a href="{{ route('simulators.training.skills') }}" class="font-bold">Simulate training costs</a>
     </div>
 </header>
