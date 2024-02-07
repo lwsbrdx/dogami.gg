@@ -23,6 +23,7 @@ use Exception;
  * @property DogamiAttributes attr
  *
  * @property bool isBox
+ * @property bool isPuppy
  * @property ?DogamiBreed breed
  * @property DogamiSkill[] skills
  */

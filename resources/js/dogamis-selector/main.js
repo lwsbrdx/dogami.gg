@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", (_) => {
             dataType: 'json',
             data: (term, page) => {
                 return {
-                    needle: term.term
+                    needle: term.term,
+                    comparator: true,
                 };
             },
             processResults: (data) => {
