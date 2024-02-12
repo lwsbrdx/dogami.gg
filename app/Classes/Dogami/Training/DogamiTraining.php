@@ -38,8 +38,8 @@ class DogamiTraining
 
             // Je gagne peut-être un niveau de bonus
             if ($actual_bonus_xp > static::BONUS_LEVEL_CEILING) {
+                $actual_bonus += floor($actual_bonus_xp / static::BONUS_LEVEL_CEILING);
                 $actual_bonus_xp %= static::BONUS_LEVEL_CEILING;
-                $actual_bonus++;
             }
         }
 
