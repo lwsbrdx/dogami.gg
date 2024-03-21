@@ -69,11 +69,12 @@ class Dogami extends Model
     {
         if (
             isset($dogamiAttribute['trait_type'])
-            && isset($dogamiAttribute['value'])
+            && isset($dogamiAttribute['rank'])
             && isset($dogamiAttribute['min_value'])
             && isset($dogamiAttribute['max_value'])
-            && isset($dogamiAttribute['rank'])
             && isset($dogamiAttribute['bonus'])
+            && isset($dogamiAttribute['bonus_level'])
+            && isset($dogamiAttribute['level'])
         ) {
             return true;
         }

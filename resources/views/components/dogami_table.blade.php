@@ -62,7 +62,7 @@
         </div>
 
         <div class="flex flex-row items-center gap-2">
-            <p>{{ $skill->value }}</p>
+            <p>{{ $skill->level }}</p>
             <p class="text-xs text-purple-400">(+{{ floor($skill->bonus/100) }})</p>
         </div>
 

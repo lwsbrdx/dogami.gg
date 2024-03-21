@@ -38,10 +38,12 @@ class DogamiSkill extends DogamiAttribute
 
     public bool $isSkill = true;
 
+    public int $level;
     public int $min_value;
     public int $max_value;
     public string $rank;
     public int $bonus;
+    public int $bonus_level;
 
     private function __construct() {}
 
@@ -49,11 +51,12 @@ class DogamiSkill extends DogamiAttribute
         $instance = new self();
 
         $instance->trait_type = $datas['trait_type'] ?? null;
-        $instance->value = $datas['value'] ?? null;
+        $instance->level = $datas['level'] ?? null;
         $instance->min_value = $datas['min_value'] ?? null;
         $instance->max_value = $datas['max_value'] ?? null;
         $instance->rank = $datas['rank'] ?? null;
         $instance->bonus = $datas['bonus'] ?? null;
+        $instance->bonus_level = $datas['bonus_level'] ?? null;
 
         return $instance;
     }
@@ -63,7 +66,7 @@ class DogamiSkill extends DogamiAttribute
             case 'trait_type_lower':
                 return strtolower($this->trait_type);
             case 'bonused_value':
-                return (int) ($this->value + floor($this->bonus/100));
+                return (int) ($this->level + floor($this->bonus/100));
             case 'max_bonused_value':
                 return (int) ($this->max_value + self::MAX_BONUS);
             default:
