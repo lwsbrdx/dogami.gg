@@ -4,7 +4,9 @@
             <img class="rounded-md" src="{{ $dogami->image }}" alt="{{ $dogami->name }}">
             <p class="mt-4 mb-0">{{ $dogami->rarity }}</p>
             <p class="mt-1">{{ $dogami->name }}</p>
-            <p class="mt-1 mb-4">{{ $dogami->breed->name }}</p>
+            @if ($dogami->isPuppy)
+                <p class="mt-1 mb-4">{{ $dogami->breed->name }}</p>
+            @endif
             @include('components.button', [
                 'link' => "https://objkt.com/tokens/dogami/$dogami->nftId",
                 'label' => 'See on objkt.com'
@@ -26,16 +28,15 @@
                 <p>ID : {{ $dogami->nftId }}</p>
                 <p>Level : {{ $dogami->level }}</p>
             </div>
+            <div class="max-w-fit mx-auto mt-4">
+                @include('components.button', [
+                    'label' => $use_max_values ? 'Use actual values' : 'Use max values',
+                    'attributes' => [
+                        'wire:click' => 'toggleUseMax'
+                    ]
+                ])
+            </div>
         @endif
-
-        <div class="max-w-fit mx-auto mt-4">
-            @include('components.button', [
-                'label' => $use_max_values ? 'Use actual values' : 'Use max values',
-                'attributes' => [
-                    'wire:click' => 'toggleUseMax'
-                ]
-            ])
-        </div>
 
         @if (count($dogami->skills) > 0)
             <div class="flex flex-row items-center justify-center mt-8">
