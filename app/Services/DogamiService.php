@@ -32,12 +32,22 @@ class DogamiService {
 
     public function count()
     {
-        $dogami_contract = 'KT1NVvPsNDChrLRH5K2cy6Sc9r1uuUwdiZQd';
+        $dogamis_count = 0;
+        $dogamis_contracts = [
+            '0xa3f2D95fF09ef87eb228D1Aa965e06DB4e9Ce71b', // Alpha
+            '0xb953ACa746f3b4AB5C9E5A6aa9A6C986a8599Be5', // Gamma
+        ];
+        
         $client = new GuzzleHttpClient([
-            'base_uri' => 'https://api.tzkt.io'
+            'base_uri' => 'https://api.polygonscan.com'
         ]);
 
-        $response = $client->get("/v1/tokens/count?contract=$dogami_contract");
-        return (int) $response->getBody()->getContents();
+        foreach ($dogamis_contracts as $dogami_contract) {
+            $response = $client->get("/api?module=stats&action=tokensupply&contractaddress=$dogami_contract&apikey=ERTJWC6J24SDUXM9HIWX2CGV28UME85BXN");
+            $response_content = json_decode($response->getBody()->getContents(), true);
+            $dogamis_count += $response_content['result'];
+        }
+
+        return $dogamis_count;
     }
 }

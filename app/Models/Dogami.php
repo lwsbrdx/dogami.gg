@@ -110,6 +110,12 @@ class Dogami extends Model
                     static::dogamiAttributesToObjects($attributes)
                 );
             case 'image':
+                $image_value = parent::__get($name);
+
+                if (str_contains($image_value, 'cdn.dogami.com')) {
+                    return $image_value;
+                }
+
                 $ipfsId = preg_split("/ipfs:\/\//", parent::__get($name))[1];
                 return "https://ipfs.io/ipfs/$ipfsId";
             case 'skills':

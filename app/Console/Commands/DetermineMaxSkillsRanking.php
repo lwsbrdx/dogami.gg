@@ -28,7 +28,7 @@ class DetermineMaxSkillsRanking extends Command
      */
     public function handle()
     {
-        ini_set('memory_limit', '1G');
+        ini_set('memory_limit', '1280M');
 
         $toDelete = DogamisRank::where('value_type', DogamisRank::MAX_VALUE)->delete();
         unset($toDelete);

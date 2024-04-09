@@ -7,10 +7,13 @@
             @if ($dogami->isPuppy)
                 <p class="mt-1 mb-4">{{ $dogami->breed->name }}</p>
             @endif
-            @include('components.button', [
-                'link' => "https://objkt.com/tokens/dogami/$dogami->nftId",
-                'label' => 'See on objkt.com'
-            ])
+
+            @if ($dogami->isPuppy && $dogami->breed->collection !== \App\Classes\Dogami\Enums\DogamiCollection::GammaS1)
+                @include('components.button', [
+                    'link' => "https://objkt.com/tokens/dogami/$dogami->nftId",
+                    'label' => 'See on objkt.com'
+                ])
+            @endif
         </div>
 
         <div class="flex flex-col gap-2 w-fit mx-auto my-3">

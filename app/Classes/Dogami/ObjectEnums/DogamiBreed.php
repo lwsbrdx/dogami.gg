@@ -6,6 +6,7 @@ use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Classes\Dogami\Enums\DogamiCollection;
 use App\Classes\Dogami\Enums\DogamiSkillRank;
 use App\Interfaces\ObjectEnum;
+use App\Models\DogamisRank;
 
 class DogamiBreed implements ObjectEnum
 {
@@ -26,12 +27,19 @@ class DogamiBreed implements ObjectEnum
     public const POMERANIAN_SPITZ = 'Pomeranian Spitz';
     public const ROTTWEILER = 'Rottweiler';
     public const SHIBA_INU = 'Shiba Inu';
+    public const AMSTAFF = 'Amstaff';
+    public const BEAGLE = 'Beagle';
+    public const BOXER = 'Boxer';
+    public const GREAT_DANE = 'Great Dane';
+    public const JACK_RUSSELL = 'Jack Russell';
 
     public const GROUP_HERDING = 'Herding';
+    public const GROUP_HOUND = 'Hound';
     public const GROUP_NON_SPORTING = 'Non-Sporting';
     public const GROUP_SPORTING = 'Sporting';
     public const GROUP_WORKING = 'Working';
     public const GROUP_TOY = 'Toy';
+    public const GROUP_TERRIER = 'Terrier';
 
 
     public function __construct(
@@ -264,6 +272,71 @@ class DogamiBreed implements ObjectEnum
                         DogamiSkill::BALANCE    => DogamiSkillRank::B,
                         DogamiSkill::MIGHT      => DogamiSkillRank::D,
                         DogamiSkill::INSTINCT   => DogamiSkillRank::A,
+                    ]
+                ),
+                new self(
+                    self::AMSTAFF,
+                    DogamiCollection::GammaS1,
+                    self::GROUP_TERRIER,
+                    [
+                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
+                        DogamiSkill::SWIM      => DogamiSkillRank::C,
+                        DogamiSkill::JUMP      => DogamiSkillRank::C,
+                        DogamiSkill::BALANCE   => DogamiSkillRank::D,
+                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
+                        DogamiSkill::INSTINCT  => DogamiSkillRank::C,
+                    ]
+                ),
+                new self(
+                    self::BEAGLE,
+                    DogamiCollection::GammaS1,
+                    self::GROUP_HOUND,
+                    [
+                        DogamiSkill::VELOCITY  => DogamiSkillRank::D,
+                        DogamiSkill::SWIM      => DogamiSkillRank::C,
+                        DogamiSkill::JUMP      => DogamiSkillRank::C,
+                        DogamiSkill::BALANCE   => DogamiSkillRank::B,
+                        DogamiSkill::MIGHT     => DogamiSkillRank::D,
+                        DogamiSkill::INSTINCT  => DogamiSkillRank::B,
+                    ]
+                ),
+                new self(
+                    self::BOXER,
+                    DogamiCollection::GammaS1,
+                    self::GROUP_WORKING,
+                    [
+                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
+                        DogamiSkill::SWIM      => DogamiSkillRank::C,
+                        DogamiSkill::JUMP      => DogamiSkillRank::A,
+                        DogamiSkill::BALANCE   => DogamiSkillRank::D,
+                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
+                        DogamiSkill::INSTINCT  => DogamiSkillRank::E,
+                    ]
+                ),
+                new self(
+                    self::GREAT_DANE,
+                    DogamiCollection::GammaS1,
+                    self::GROUP_WORKING,
+                    [
+                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
+                        DogamiSkill::SWIM      => DogamiSkillRank::C,
+                        DogamiSkill::JUMP      => DogamiSkillRank::B,
+                        DogamiSkill::BALANCE   => DogamiSkillRank::C,
+                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
+                        DogamiSkill::INSTINCT  => DogamiSkillRank::E,
+                    ]
+                ),
+                new self(
+                    self::JACK_RUSSELL,
+                    DogamiCollection::GammaS1,
+                    self::GROUP_TERRIER,
+                    [
+                        DogamiSkill::VELOCITY  => DogamiSkillRank::A,
+                        DogamiSkill::SWIM      => DogamiSkillRank::B,
+                        DogamiSkill::JUMP      => DogamiSkillRank::C,
+                        DogamiSkill::BALANCE   => DogamiSkillRank::C,
+                        DogamiSkill::MIGHT     => DogamiSkillRank::E,
+                        DogamiSkill::INSTINCT  => DogamiSkillRank::D,
                     ]
                 ),
             ];
