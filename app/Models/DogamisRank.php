@@ -22,13 +22,13 @@ class DogamisRank extends Model {
     protected $keyType = 'int';
     public $incrementing = false;
 
-    public static function totalRanksForSkill(string $skill_name): int
+    public static function totalRanksForSkill(string $skill_name, string $value_type): int
     {
         $skill_name = strtolower($skill_name);
         if (in_array($skill_name, DogamiSkill::SKILLS, true) === false) {
             throw new Exception("$skill_name is not a valid skill");
         }
 
-        return self::where('skill_type', $skill_name)->count();
+        return self::where('skill_type', $skill_name)->where('value_type', $value_type)->count();
     }
 }

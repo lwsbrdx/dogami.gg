@@ -130,7 +130,7 @@
             @if ($use_max_values === false)
                 <div>{{ $skill->level }} <span class="text-[#9146b6]">(+{{ $bonus_value }})</span></div>
             @endif
-            <div>{{ $skill_ranking->ranking }} / {{ App\Models\DogamisRank::totalRanksForSkill($skill->trait_type) }}</div>
+            <div>{{ $skill_ranking->ranking }} / {{ App\Models\DogamisRank::totalRanksForSkill($skill->trait_type, $use_max_values ? App\Models\DogamisRank::MAX_VALUE : App\Models\DogamisRank::ACTUAL_VALUE) }}</div>
             <div>({{ count($skill_ranking->dogamis) - 1 }} ties)</div>
         </div>
     @endforeach
