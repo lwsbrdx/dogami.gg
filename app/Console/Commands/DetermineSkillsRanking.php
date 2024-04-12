@@ -6,6 +6,7 @@ use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Models\Dogami;
 use App\Models\DogamisRank;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 
 class DetermineSkillsRanking extends Command
 {
@@ -34,48 +35,25 @@ class DetermineSkillsRanking extends Command
         $toDelete = DogamisRank::where('value_type', DogamisRank::ACTUAL_VALUE)->delete();
         unset($toDelete);
 
-        $dogamis = Dogami::all();
+        foreach (DogamiSkill::SKILLS as $skill) {
+            $ucfSkill = ucfirst($skill);
+            
+            $aggregate = [['$match' => ['datas.attributes.trait_type' => "$ucfSkill"]], ['$unwind' => '$datas.attributes'], ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$ucfSkill", 'Breed']]]], ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]], ['$project' => ['_id' => 0, 'nftId' => '$_id', 'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]], 'level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.level', 'else' => null]]]], 1]], 'bonus_level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.bonus_level', 'else' => null]]]], 1]]]], ['$group' => ['_id' => ['$add' => ['$level', '$bonus_level']], 'dogamis' => ['$push' => ['id' => '$nftId', 'breed' => '$breed']]]], ['$sort' => ['_id' => -1]], ['$project' => ['value_type' => 'actual', 'skill_type' => "$skill", 'skill_value' => '$_id', 'dogamis' => 1]]];
 
-        foreach(DogamiSkill::SKILLS as $skill)
-        {
-            // 1. Trier les chiens par niveau de la compétence
-            // 1. a) Ceux qui ont la même valeur ensemble
-            $values = [];
-            foreach ($dogamis as $dogami)
-            {
-                if ($dogami->isBox) continue;
+            $results = DB::collection('dogamis')->raw(function ($collection) use ($aggregate) {
+                return $collection->aggregate($aggregate);
+            });
 
-                /** @var DogamiSkill $dogamiSkill */
-                $dogamiSkill = $dogami->$skill;
-                $values[$dogamiSkill->bonused_value] = [
-                    'dogamis' => [
-                        ...($values[$dogamiSkill->bonused_value]['dogamis'] ?? []),
-                        [
-                            "id" => $dogami->nftId,
-                            "breed" => $dogami->breed->name,
-                        ]
-                    ]
-                ];
-            }
-            // 1. b) Trier par valeur de la compétence, du plus grand au plus petit
-            krsort($values);
-
-            // 2. Création des rankings à mettre en bdd
-            $i = 1;
-            foreach ($values as $skill_value => $value) {
+            foreach ($results as $key => $result) {
                 $dogamiRank = new DogamisRank;
-                $dogamiRank->ranking = $i;
+                $dogamiRank->ranking = $key + 1;
                 $dogamiRank->value_type = DogamisRank::ACTUAL_VALUE;
                 $dogamiRank->skill_type = $skill;
-                $dogamiRank->skill_value = $skill_value;
-                $dogamiRank->dogamis = $value['dogamis'];
+                $dogamiRank->skill_value = $result['skill_value'];
+                $dogamiRank->dogamis = $result['dogamis'];
 
                 $dogamiRank->save();
-
-                $i++;
             }
-            // plus besoin de ce tableau, on vide la mémoire
-            unset($values);
         }
     }
 }
