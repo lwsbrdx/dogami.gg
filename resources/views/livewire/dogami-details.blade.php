@@ -35,7 +35,9 @@
                 @include('components.button', [
                     'label' => $use_max_values ? 'Use actual values' : 'Use max values',
                     'attributes' => [
-                        'wire:click' => 'toggleUseMax'
+                        'wire:click' => 'toggleUseMax',
+                        'wire:target' => 'update',
+                        'wire:loading.attr' => 'disabled',
                     ]
                 ])
             </div>
