@@ -38,7 +38,15 @@ class DetermineSkillsRanking extends Command
         foreach (DogamiSkill::SKILLS as $skill) {
             $ucfSkill = ucfirst($skill);
             
-            $aggregate = [['$match' => ['datas.attributes.trait_type' => "$ucfSkill"]], ['$unwind' => '$datas.attributes'], ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$ucfSkill", 'Breed']]]], ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]], ['$project' => ['_id' => 0, 'nftId' => '$_id', 'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]], 'level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.level', 'else' => null]]]], 1]], 'bonus_level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.bonus_level', 'else' => null]]]], 1]]]], ['$group' => ['_id' => ['$add' => ['$level', '$bonus_level']], 'dogamis' => ['$push' => ['id' => '$nftId', 'breed' => '$breed']]]], ['$sort' => ['_id' => -1]], ['$project' => ['value_type' => 'actual', 'skill_type' => "$skill", 'skill_value' => '$_id', 'dogamis' => 1]]];
+            $aggregate = [
+                ['$unwind' => '$datas.attributes'],
+                ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$ucfSkill", 'Breed']]]],
+                ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]],
+                ['$project' => ['_id' => 0, 'nftId' => '$_id', 'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]], 'level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.level', 'else' => null]]]], 1]], 'bonus_level' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.bonus_level', 'else' => null]]]], 1]]]],
+                ['$group' => ['_id' => ['$add' => ['$level', '$bonus_level']], 'dogamis' => ['$push' => ['id' => '$nftId', 'breed' => '$breed']]]],
+                ['$sort' => ['_id' => -1]],
+                ['$project' => ['value_type' => 'actual', 'skill_type' => "$skill", 'skill_value' => '$_id', 'dogamis' => 1]]
+            ];
 
             $results = DB::collection('dogamis')->raw(function ($collection) use ($aggregate) {
                 return $collection->aggregate($aggregate);

@@ -38,7 +38,6 @@ class DetermineMaxSkillsRanking extends Command
             $ucfSkill = ucfirst($skill);
 
             $aggregate = [
-                ['$match' => ['datas.attributes.trait_type' => "$ucfSkill"]],
                 ['$unwind' => '$datas.attributes'],
                 ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$ucfSkill", 'Breed']]]],
                 ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]],
