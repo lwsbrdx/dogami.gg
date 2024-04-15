@@ -29,9 +29,6 @@ class DetermineSkillsRanking extends Command
      */
     public function handle()
     {
-        ini_set('max_execution_time', 300);
-        ini_set('memory_limit', '768M');
-
         $toDelete = DogamisRank::where('value_type', DogamisRank::ACTUAL_VALUE)->delete();
         unset($toDelete);
 
@@ -55,6 +52,7 @@ class DetermineSkillsRanking extends Command
             foreach ($results as $key => $result) {
                 $dogamiRank = new DogamisRank;
                 $dogamiRank->ranking = $key + 1;
+                $dogamiRank->ranking_type = DogamisRank::GLOBAL_RANKING;
                 $dogamiRank->value_type = DogamisRank::ACTUAL_VALUE;
                 $dogamiRank->skill_type = $skill;
                 $dogamiRank->skill_value = $result['skill_value'];

@@ -60,6 +60,7 @@ class DetermineMaxSkillsRanking extends Command
             foreach ($results as $key => $result) {
                 $dogamiRank = new DogamisRank;
                 $dogamiRank->ranking = $key + 1;
+                $dogamiRank->ranking_type = DogamisRank::GLOBAL_RANKING;
                 $dogamiRank->value_type = DogamisRank::MAX_VALUE;
                 $dogamiRank->skill_type = $skill;
                 $dogamiRank->skill_value = $result['skill_value'];
