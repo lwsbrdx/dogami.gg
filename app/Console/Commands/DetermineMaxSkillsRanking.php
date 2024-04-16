@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Classes\Dogami\Attribute\DogamiSkill;
-use App\Models\Dogami;
+use App\Classes\Dogami\ObjectEnums\DogamiSkillEnum;
 use App\Models\DogamisRank;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
@@ -32,30 +32,9 @@ class DetermineMaxSkillsRanking extends Command
         $toDelete = DogamisRank::where('value_type', DogamisRank::MAX_VALUE)->delete();
         unset($toDelete);
 
-        /** @var string $skill */
-        foreach(DogamiSkill::SKILLS as $skill)
+        foreach(DogamiSkillEnum::all() as $skill)
         {
-            $ucfSkill = ucfirst($skill);
-
-            $aggregate = [
-                ['$unwind' => '$datas.attributes'],
-                ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$ucfSkill", 'Breed']]]],
-                ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]],
-                ['$project' => [
-                        '_id' => 0,
-                        'nftId' => '$_id',
-                        'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]],
-                        'max_value' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$ucfSkill"]], 'then' => '$$attr.max_value', 'else' => null]]]], 1]]
-                    ]
-                ],
-                ['$group' => ['_id' => ['$add' => ['$max_value', DogamiSkill::MAX_BONUS]], 'dogamis' => ['$push' => ['id' => '$nftId', 'breed' => '$breed']]]],
-                ['$sort' => ['_id' => -1]],
-                ['$project' => ['value_type' => 'max', 'skill_type' => "$skill", 'skill_value' => '$_id', 'dogamis' => 1]]
-            ];
-
-            $results = DB::collection('dogamis')->raw(function ($collection) use ($aggregate) {
-                return $collection->aggregate($aggregate);
-            });
+            $results = $this->requestDogamisBySkill($skill);
 
             foreach ($results as $key => $result) {
                 $dogamiRank = new DogamisRank;
@@ -69,5 +48,32 @@ class DetermineMaxSkillsRanking extends Command
                 $dogamiRank->save();
             }
         }
+    }
+
+    private function requestDogamisBySkill(DogamiSkillEnum $skill) {
+
+        $skillLabel = $skill->label;
+
+        $aggregate = [
+            ['$unwind' => '$datas.attributes'],
+            ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$skill->label", 'Breed']]]],
+            ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]],
+            ['$project' => [
+                    '_id' => 0,
+                    'nftId' => '$_id',
+                    'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]],
+                    'max_value' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', "$skillLabel"]], 'then' => '$$attr.max_value', 'else' => null]]]], 1]]
+                ]
+            ],
+            ['$group' => ['_id' => ['$add' => ['$max_value', DogamiSkill::MAX_BONUS]], 'dogamis' => ['$push' => ['id' => '$nftId', 'breed' => '$breed']]]],
+            ['$sort' => ['_id' => -1]],
+            ['$project' => ['value_type' => 'max', 'skill_type' => "$skill->value", 'skill_value' => '$_id', 'dogamis' => 1]]
+        ];
+
+
+
+        return DB::collection('dogamis')->raw(function ($collection) use ($aggregate) {
+            return $collection->aggregate($aggregate);
+        });
     }
 }
