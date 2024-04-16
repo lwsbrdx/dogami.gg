@@ -7,6 +7,7 @@ use App\Classes\Dogami\Attribute\DogamiAttributes;
 use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Classes\Dogami\Enums\DogamiStatus;
 use App\Classes\Dogami\ObjectEnums\DogamiBreed;
+use App\Classes\Dogami\ObjectEnums\DogamiSkillEnum;
 use MongoDB\Laravel\Eloquent\Model;
 use Exception;
 
@@ -120,12 +121,12 @@ class Dogami extends Model
                 return "https://ipfs.io/ipfs/$ipfsId";
             case 'skills':
                 return $this->attr->getSkills();
-            case DogamiSkill::VELOCITY:
-            case DogamiSkill::SWIM:
-            case DogamiSkill::JUMP:
-            case DogamiSkill::BALANCE:
-            case DogamiSkill::MIGHT:
-            case DogamiSkill::INSTINCT:
+            case DogamiSkillEnum::Velocity:
+            case DogamiSkillEnum::Swim:
+            case DogamiSkillEnum::Jump:
+            case DogamiSkillEnum::Balance:
+            case DogamiSkillEnum::Might:
+            case DogamiSkillEnum::Instinct:
                 $skills = $this->attr->getSkills();
                 foreach ($skills as $skill)
                 {

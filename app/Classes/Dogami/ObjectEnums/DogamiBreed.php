@@ -6,7 +6,6 @@ use App\Classes\Dogami\Attribute\DogamiSkill;
 use App\Classes\Dogami\Enums\DogamiCollection;
 use App\Classes\Dogami\Enums\DogamiSkillRank;
 use App\Interfaces\ObjectEnum;
-use App\Models\DogamisRank;
 
 class DogamiBreed implements ObjectEnum
 {
@@ -52,7 +51,7 @@ class DogamiBreed implements ObjectEnum
     public static function find(mixed $needle): ?self
     {
         if (is_string($needle) === false) {
-            return false;
+            return null;
         }
 
         foreach(self::all() as $dogamiBreed) {
@@ -84,12 +83,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_HERDING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::B,
-                        DogamiSkill::SWIM       => DogamiSkillRank::B,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::D,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::B,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::D,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::D,
                     ]
                 ),
                 new self(
@@ -97,12 +96,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_NON_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::D,
-                        DogamiSkill::JUMP       => DogamiSkillRank::D,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::B,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::B,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -110,12 +109,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_HERDING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::E,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::E,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -123,12 +122,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::B,
-                        DogamiSkill::SWIM       => DogamiSkillRank::B,
-                        DogamiSkill::JUMP       => DogamiSkillRank::D,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::D,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::B,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::D,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::C,
                     ]
                 ),
                 new self(
@@ -136,12 +135,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_WORKING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::D,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::D,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -149,12 +148,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::A,
-                        DogamiSkill::JUMP       => DogamiSkillRank::D,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::A,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::D,
                     ]
                 ),
                 new self(
@@ -162,12 +161,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_TOY,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::D,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::A,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::E,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::A,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::E,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -175,12 +174,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_WORKING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::D,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::A,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::E,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::A,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::E,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::C,
                     ]
                 ),
                 new self(
@@ -188,12 +187,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_NON_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::B,
-                        DogamiSkill::SWIM       => DogamiSkillRank::D,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::B,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::D,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::B,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::D,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::C,
                     ]
                 ),
                 new self(
@@ -201,12 +200,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS1,
                     self::GROUP_TOY,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::B,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::B,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::E,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::B,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::B,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::E,
                     ]
                 ),
                 new self(
@@ -214,12 +213,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS2,
                     self::GROUP_NON_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::D,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::C,
                     ]
                 ),
                 new self(
@@ -227,12 +226,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS2,
                     self::GROUP_HERDING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::B,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::C,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::D,
                     ]
                 ),
                 new self(
@@ -240,12 +239,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS2,
                     self::GROUP_NON_SPORTING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::E,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::D,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::A,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::E,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::A,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -253,12 +252,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS2,
                     self::GROUP_TOY,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::A,
-                        DogamiSkill::SWIM       => DogamiSkillRank::D,
-                        DogamiSkill::JUMP       => DogamiSkillRank::B,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::D,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::A,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::D,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::B,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::D,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::D,
                     ]
                 ),
                 new self(
@@ -266,12 +265,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::AlphaS2,
                     self::GROUP_HERDING,
                     [
-                        DogamiSkill::VELOCITY   => DogamiSkillRank::C,
-                        DogamiSkill::SWIM       => DogamiSkillRank::C,
-                        DogamiSkill::JUMP       => DogamiSkillRank::E,
-                        DogamiSkill::BALANCE    => DogamiSkillRank::B,
-                        DogamiSkill::MIGHT      => DogamiSkillRank::D,
-                        DogamiSkill::INSTINCT   => DogamiSkillRank::A,
+                        DogamiSkillEnum::Velocity   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim       => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump       => DogamiSkillRank::E,
+                        DogamiSkillEnum::Balance    => DogamiSkillRank::B,
+                        DogamiSkillEnum::Might      => DogamiSkillRank::D,
+                        DogamiSkillEnum::Instinct   => DogamiSkillRank::A,
                     ]
                 ),
                 new self(
@@ -279,12 +278,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::GammaS1,
                     self::GROUP_TERRIER,
                     [
-                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
-                        DogamiSkill::SWIM      => DogamiSkillRank::C,
-                        DogamiSkill::JUMP      => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE   => DogamiSkillRank::D,
-                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT  => DogamiSkillRank::C,
+                        DogamiSkillEnum::Velocity  => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Might     => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct  => DogamiSkillRank::C,
                     ]
                 ),
                 new self(
@@ -292,12 +291,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::GammaS1,
                     self::GROUP_HOUND,
                     [
-                        DogamiSkill::VELOCITY  => DogamiSkillRank::D,
-                        DogamiSkill::SWIM      => DogamiSkillRank::C,
-                        DogamiSkill::JUMP      => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE   => DogamiSkillRank::B,
-                        DogamiSkill::MIGHT     => DogamiSkillRank::D,
-                        DogamiSkill::INSTINCT  => DogamiSkillRank::B,
+                        DogamiSkillEnum::Velocity  => DogamiSkillRank::D,
+                        DogamiSkillEnum::Swim      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance   => DogamiSkillRank::B,
+                        DogamiSkillEnum::Might     => DogamiSkillRank::D,
+                        DogamiSkillEnum::Instinct  => DogamiSkillRank::B,
                     ]
                 ),
                 new self(
@@ -305,12 +304,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::GammaS1,
                     self::GROUP_WORKING,
                     [
-                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
-                        DogamiSkill::SWIM      => DogamiSkillRank::C,
-                        DogamiSkill::JUMP      => DogamiSkillRank::A,
-                        DogamiSkill::BALANCE   => DogamiSkillRank::D,
-                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT  => DogamiSkillRank::E,
+                        DogamiSkillEnum::Velocity  => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump      => DogamiSkillRank::A,
+                        DogamiSkillEnum::Balance   => DogamiSkillRank::D,
+                        DogamiSkillEnum::Might     => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct  => DogamiSkillRank::E,
                     ]
                 ),
                 new self(
@@ -318,12 +317,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::GammaS1,
                     self::GROUP_WORKING,
                     [
-                        DogamiSkill::VELOCITY  => DogamiSkillRank::C,
-                        DogamiSkill::SWIM      => DogamiSkillRank::C,
-                        DogamiSkill::JUMP      => DogamiSkillRank::B,
-                        DogamiSkill::BALANCE   => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT     => DogamiSkillRank::B,
-                        DogamiSkill::INSTINCT  => DogamiSkillRank::E,
+                        DogamiSkillEnum::Velocity  => DogamiSkillRank::C,
+                        DogamiSkillEnum::Swim      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Jump      => DogamiSkillRank::B,
+                        DogamiSkillEnum::Balance   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might     => DogamiSkillRank::B,
+                        DogamiSkillEnum::Instinct  => DogamiSkillRank::E,
                     ]
                 ),
                 new self(
@@ -331,12 +330,12 @@ class DogamiBreed implements ObjectEnum
                     DogamiCollection::GammaS1,
                     self::GROUP_TERRIER,
                     [
-                        DogamiSkill::VELOCITY  => DogamiSkillRank::A,
-                        DogamiSkill::SWIM      => DogamiSkillRank::B,
-                        DogamiSkill::JUMP      => DogamiSkillRank::C,
-                        DogamiSkill::BALANCE   => DogamiSkillRank::C,
-                        DogamiSkill::MIGHT     => DogamiSkillRank::E,
-                        DogamiSkill::INSTINCT  => DogamiSkillRank::D,
+                        DogamiSkillEnum::Velocity  => DogamiSkillRank::A,
+                        DogamiSkillEnum::Swim      => DogamiSkillRank::B,
+                        DogamiSkillEnum::Jump      => DogamiSkillRank::C,
+                        DogamiSkillEnum::Balance   => DogamiSkillRank::C,
+                        DogamiSkillEnum::Might     => DogamiSkillRank::E,
+                        DogamiSkillEnum::Instinct  => DogamiSkillRank::D,
                     ]
                 ),
             ];

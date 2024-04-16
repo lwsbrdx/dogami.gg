@@ -2,6 +2,8 @@
 
 namespace App\Classes\Dogami\Attribute;
 
+use App\Classes\Dogami\ObjectEnums\DogamiSkillEnum;
+
 /**
  * @property int $bonused_value
  * @property int $max_bonused_value
@@ -9,29 +11,22 @@ namespace App\Classes\Dogami\Attribute;
  */
 class DogamiSkill extends DogamiAttribute
 {
-    public const VELOCITY = 'velocity';
-    public const SWIM = 'swim';
-    public const JUMP = 'jump';
-    public const BALANCE = 'balance';
-    public const MIGHT = 'might';
-    public const INSTINCT = 'instinct';
-
     public const SKILLS = [
-        self::VELOCITY,
-        self::SWIM,
-        self::JUMP,
-        self::BALANCE,
-        self::MIGHT,
-        self::INSTINCT,
+        DogamiSkillEnum::Velocity,
+        DogamiSkillEnum::Swim,
+        DogamiSkillEnum::Jump,
+        DogamiSkillEnum::Balance,
+        DogamiSkillEnum::Might,
+        DogamiSkillEnum::Instinct,
     ];
 
     public const SKILLS_COLORS = [
-        self::VELOCITY => 'yellow',
-        self::SWIM => 'blue',
-        self::JUMP => 'orange',
-        self::BALANCE => 'green',
-        self::MIGHT => 'red',
-        self::INSTINCT => 'purple',
+        DogamiSkillEnum::Velocity => 'yellow',
+        DogamiSkillEnum::Swim => 'blue',
+        DogamiSkillEnum::Jump => 'orange',
+        DogamiSkillEnum::Balance => 'green',
+        DogamiSkillEnum::Might => 'red',
+        DogamiSkillEnum::Instinct => 'purple',
     ];
 
     public const MAX_BONUS = 200;
