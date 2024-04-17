@@ -5,7 +5,6 @@ use App\Http\Controllers\DesignSystemController;
 use App\Http\Controllers\DogamisController;
 use App\Http\Controllers\LeaderboardsController;
 use App\Http\Controllers\SimulatorsController;
-use App\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,3 +36,9 @@ Route::match(
     '/simulators/skills-trainings',
     [SimulatorsController::class, 'trainings']
 )->name('simulators.training.skills');
+
+Route::match(
+    ['get', 'post'],
+    '/simulators/dogami-training',
+    [SimulatorsController::class, 'trainOneDogami']
+)->name('simulators.training.dogami');
