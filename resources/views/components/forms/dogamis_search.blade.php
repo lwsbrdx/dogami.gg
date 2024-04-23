@@ -29,9 +29,7 @@
         @endforeach
     </select>
 
-    <div class="mt-3 sm:ml-3 sm:mt-0">
-        <button class="bg-[#2d123b] transition border border-[#2d123b] active:border-gray-400 px-6 py-2 rounded-md">
-            Search
-        </button>
-    </div>
+    @include('components.button', [
+        'label' => 'Search',
+    ])
 </form>
