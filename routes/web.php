@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CompareDogamisController;
 use App\Http\Controllers\DesignSystemController;
 use App\Http\Controllers\DogamisController;
@@ -42,3 +43,8 @@ Route::match(
     '/simulators/dogami-training',
     [SimulatorsController::class, 'trainOneDogami']
 )->name('simulators.training.dogami');
+
+// ADMIN
+Route::controller(AdminController::class)->prefix('admin')->group(static function () {
+    Route::get('/', 'index');
+});

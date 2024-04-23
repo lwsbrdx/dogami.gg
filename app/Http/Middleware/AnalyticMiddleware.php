@@ -8,6 +8,7 @@ use App\Classes\Analytic\Enums\AnalyticEventType;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Jenssegers\Agent\Agent;
+use App\Http\Controllers\AdminController;
 
 class AnalyticMiddleware
 {
@@ -60,7 +61,7 @@ class AnalyticMiddleware
                 $except = trim($except, '/');
             }
 
-            if ($request->fullUrlIs($except) || $request->is($except)) {
+            if ($request->fullUrlIs($except) || $request->is($except) || str_contains($request->url(), AdminController::ADMIN_URI_PREFIX)) {
                 return $response;
             }
         }

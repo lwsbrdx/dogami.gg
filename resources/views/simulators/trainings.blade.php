@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.site.app')
 
 @section('content')
     <form action="{{ route('simulators.training.skills') }}" method="post">

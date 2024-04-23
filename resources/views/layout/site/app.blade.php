@@ -17,13 +17,13 @@
     </head>
     <body class="antialiased px-6">
         <div class="min-h-screen text-gray-500 dark:text-gray-400 bg-dots-darker bg-center dark:bg-dots-lighter selection:bg-purple-500 selection:text-white">
-            @include('layout.parts.header')
+            @include('layout.site.parts.header')
 
             <main class="max-w-[1280px] mx-auto py-5">
                 @yield('content')
             </main>
 
-            @include('layout.parts.footer')
+            @include('layout.site.parts.footer')
         </div>
     </body>
 

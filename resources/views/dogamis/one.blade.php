@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.site.app')
 
 @section('content')
     @livewire('dogami-details', [

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.site.app')
 
 @section('content')
 <div class="flex flex-col gap-2 w-fit mx-auto my-3">

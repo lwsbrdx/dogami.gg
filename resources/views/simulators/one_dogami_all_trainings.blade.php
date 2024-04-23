@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.site.app')
 
 @use(App\Classes\Dogami\ObjectEnums\DogamiSkillEnum)
 @use(App\Classes\Dogami\ObjectEnums\DogamiTreatType)
