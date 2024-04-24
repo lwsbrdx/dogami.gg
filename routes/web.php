@@ -19,8 +19,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/design', [DesignSystemController::class, 'index']);
+/*
+| ADMIN 
+*/
 
+Route::controller(AdminController::class)->domain('admin.' . config('app.url'))->group(static function () {
+    Route::get('/', 'index');
+});
+
+/*
+| DESIGN
+*/
+Route::domain('design.' . config('app.url'))->get('/', [DesignSystemController::class, 'index']);
+
+/*
+| ROOT DOMAIN
+*/
 Route::get('/', [DogamisController::class, 'all'])->name('home');
 Route::get('/dogami/{dogami_id}', [DogamisController::class, 'one'])->name('dogamis.one');
 Route::post('/dogami/{dogami_id}', [DogamisController::class, 'update'])->name('dogamis.one.update');
@@ -43,8 +57,3 @@ Route::match(
     '/simulators/dogami-training',
     [SimulatorsController::class, 'trainOneDogami']
 )->name('simulators.training.dogami');
-
-// ADMIN
-Route::controller(AdminController::class)->prefix('admin')->group(static function () {
-    Route::get('/', 'index');
-});
