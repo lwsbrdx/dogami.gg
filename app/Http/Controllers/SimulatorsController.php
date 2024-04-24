@@ -55,7 +55,7 @@ class SimulatorsController extends Controller
             $dogami = Dogami::find((int) $request->dogami_id);
 
             foreach ($dogami->skills as $skill) {
-                $trainingPrice = DogamiTrainingPrice::find($skill->bonus_level);
+                $trainingPrice = DogamiTrainingPrice::find($dogami);
                 $skillEnum = DogamiSkillEnum::find($skill->trait_type);
 
                 $end_bonus_level = $trainingPrice->max_bonus + 1;
