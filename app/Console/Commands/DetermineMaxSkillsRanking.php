@@ -32,8 +32,7 @@ class DetermineMaxSkillsRanking extends Command
         $toDelete = DogamisRank::where('value_type', DogamisRank::MAX_VALUE)->delete();
         unset($toDelete);
 
-        foreach(DogamiSkillEnum::all() as $skill)
-        {
+        foreach (DogamiSkillEnum::all() as $skill) {
             $results = $this->requestDogamisBySkill($skill);
 
             foreach ($results as $key => $result) {
@@ -41,7 +40,7 @@ class DetermineMaxSkillsRanking extends Command
                 $dogamiRank->ranking = $key + 1;
                 $dogamiRank->ranking_type = DogamisRank::GLOBAL_RANKING;
                 $dogamiRank->value_type = DogamisRank::MAX_VALUE;
-                $dogamiRank->skill_type = $skill;
+                $dogamiRank->skill_type = $skill->value;
                 $dogamiRank->skill_value = $result['skill_value'];
                 $dogamiRank->dogamis = $result['dogamis'];
 
@@ -50,7 +49,8 @@ class DetermineMaxSkillsRanking extends Command
         }
     }
 
-    private function requestDogamisBySkill(DogamiSkillEnum $skill) {
+    private function requestDogamisBySkill(DogamiSkillEnum $skill)
+    {
 
         $skillLabel = $skill->label;
 
@@ -58,7 +58,8 @@ class DetermineMaxSkillsRanking extends Command
             ['$unwind' => '$datas.attributes'],
             ['$match' => ['datas.attributes.trait_type' => ['$in' => ["$skill->label", 'Breed']]]],
             ['$group' => ['_id' => '$nftId', 'attributes' => ['$push' => '$datas.attributes']]],
-            ['$project' => [
+            [
+                '$project' => [
                     '_id' => 0,
                     'nftId' => '$_id',
                     'breed' => ['$arrayElemAt' => [['$map' => ['input' => '$attributes', 'as' => 'attr', 'in' => ['$cond' => ['if' => ['$eq' => ['$$attr.trait_type', 'Breed']], 'then' => '$$attr.value', 'else' => null]]]], 0]],
