@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 /*
-| ADMIN 
+| ADMIN
 */
 
-Route::controller(AdminController::class)->domain('admin.' . config('app.url'))->group(static function () {
+Route::controller(AdminController::class)->domain(AdminController::ADMIN_SUBDOMAIN . '.' . config('app.url'))->group(static function () {
     Route::get('/', 'index');
 });
 

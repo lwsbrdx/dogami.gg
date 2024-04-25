@@ -61,7 +61,7 @@ class AnalyticMiddleware
                 $except = trim($except, '/');
             }
 
-            if ($request->fullUrlIs($except) || $request->is($except) || str_contains($request->url(), AdminController::ADMIN_URI_PREFIX)) {
+            if ($request->fullUrlIs($except) || $request->is($except) || str_contains($request->url(), AdminController::ADMIN_SUBDOMAIN)) {
                 return $response;
             }
         }

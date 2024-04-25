@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public const ADMIN_URI_PREFIX = 'admin';
+    public const ADMIN_SUBDOMAIN = 'admin';
 
     public function index(Request $request)
     {
